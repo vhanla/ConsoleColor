@@ -1,4 +1,4 @@
-{
+﻿{
 The MIT License (MIT)
 
 Copyright (c) 2017 Victor Alberto Gil <vhanla>
@@ -22,6 +22,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 TODO:
 - Add multiple profile manager, for PowerShell, Cmd, ConEmu, etc.
+
+CHANGELOG:
+
+2017-09-12
+  - Added importing features from MSColorTool ini files
+  - Added importing iTermColors (partial, since Background, Alpha and Foreground are omitted)
+
+KNOWN BUG:
+- If unknown color scheme is loaded and it defaults to Default Color in combo box
+  picking color gets delayed in textpreview procedure
 }
 unit main;
 
@@ -30,7 +40,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons, Registry,
-  Vcl.ComCtrls, Winapi.Richedit, IniFiles, Vcl.Menus;
+  Vcl.ComCtrls, Winapi.Richedit, IniFiles, Vcl.Menus, ShlObj, Activex, ComObj, ShellApi,
+  System.ImageList, Vcl.ImgList, MSXML, IOUtils, UCL.TUCaptionBar, UCL.TUForm,
+  UCL.TUThemeManager, UCL.TUSymbolButton, UCL.TUPanel, UCL.IntAnimation, UCL.IntAnimation.Helpers,
+  UCL.TUButton, UCL.TUScrollBox, pngimage;
 
 type
 
@@ -44,7 +57,7 @@ type
   public
     property BackColor: TColor read GetBackColor write SetBackColor;
   end;
-  TForm1 = class(TForm)
+  TfrmMain = class(TUForm)
     ColorDialog1: TColorDialog;
     Panel1: TPanel;
     GridPanel1: TGridPanel;
@@ -66,29 +79,59 @@ type
     col15: TPanel;
     ComboBox1: TComboBox;
     Label1: TLabel;
-    Label2: TLabel;
     RichEdit1: TRichEdit;
-    btnApply: TButton;
-    Button2: TButton;
-    btnNew: TButton;
-    btnSave: TButton;
+    btnColorCmd: TButton;
     btnResetCmd: TButton;
     Timer1: TTimer;
-    btnReload: TButton;
-    btnDelete: TButton;
+    OpenDialog1: TOpenDialog;
+    ListBox1: TListBox;
+    ImageList1: TImageList;
+    Button1: TButton;
+    UCaptionBar1: TUCaptionBar;
+    UThemeManager1: TUThemeManager;
+    drawerNavigation: TUPanel;
+    buttonOpenMenu: TUSymbolButton;
+    buttonMenuSettings: TUSymbolButton;
+    buttonMenuProfile: TUSymbolButton;
+    buttonMenuSave: TUSymbolButton;
+    buttonMenuOpen: TUSymbolButton;
+    buttonMenuRate: TUSymbolButton;
+    btnReload: TUButton;
+    btnSave: TUButton;
+    btnCmdPreview: TUButton;
+    btnPSPreview: TUButton;
+    btnImport: TUButton;
+    btnDelete: TUButton;
+    btnNew: TUButton;
+    btnApply: TUButton;
+    UScrollBox1: TUScrollBox;
+    USymbolButton1: TUSymbolButton;
+    UButton4: TUButton;
+    UButton3: TUButton;
+    UButton2: TUButton;
+    UButton1: TUButton;
     procedure PickColor(Sender: TObject; Button: TMouseButton;
               Shift: TShiftState; X, Y: Integer);
     procedure FormCreate(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btnColorCmdClick(Sender: TObject);
     procedure btnNewClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnResetCmdClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure btnReloadClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
+    procedure btnPSPreviewClick(Sender: TObject);
+    procedure ImportClick(Sender: TObject);
+    procedure btnCmdPreviewClick(Sender: TObject);
+    procedure buttonOpenMenuClick(Sender: TObject);
+    procedure btnReloadClick(Sender: TObject);
+    procedure btnImportClick(Sender: TObject);
+    procedure USymbolButton1Click(Sender: TObject);
+    procedure UButton1Click(Sender: TObject);
+    procedure UButton2Click(Sender: TObject);
+    procedure UButton3Click(Sender: TObject);
   private
     { Private declarations }
     procedure LoadDefaultColors;
@@ -99,6 +142,10 @@ type
     function HashColors: String;
     procedure UpdateCollectionIndex;
     procedure LoadColor(const fname: String);
+    procedure ImportRegfile(const fname: String);
+    procedure ImportITermFile(const fname: String);
+    procedure ImportINIFile(const fname: String);
+    procedure ListRegisteredShells;
   public
     { Public declarations }
   end;
@@ -106,7 +153,7 @@ type
 const
   COLORSPATH = 'collection';
 var
-  Form1: TForm1;
+  frmMain: TfrmMain;
   ColorsPaths: String;
 
   //ColorTable00 to ColorTable15 on HKCU\Console\ REG_DWORD
@@ -123,7 +170,46 @@ var
   CurrentColorsHash: String;
   CollectionHash: TStringList;
 
+  MSColors: Array[0..15] of string = (
+    'DARK_BLACK',
+    'DARK_BLUE',
+    'DARK_GREEN',
+    'DARK_CYAN',
+    'DARK_RED',
+    'DARK_MAGENTA',
+    'DARK_YELLOW',
+    'DARK_WHITE',
+    'BRIGHT_BLACK',
+    'BRIGHT_BLUE',
+    'BRIGHT_GREEN',
+    'BRIGHT_CYAN',
+    'BRIGHT_RED',
+    'BRIGHT_MAGENTA',
+    'BRIGHT_YELLOW',
+    'BRIGHT_WHITE'
+    );
+  iTermColors: Array[0..15] of String = (
+    'Ansi 0 Color',
+    'Ansi 4 Color',
+    'Ansi 2 Color',
+    'Ansi 6 Color',
+    'Ansi 1 Color',
+    'Ansi 5 Color',
+    'Ansi 3 Color',
+    'Ansi 7 Color',
+    'Ansi 8 Color',
+    'Ansi 12 Color',
+    'Ansi 10 Color',
+    'Ansi 14 Color',
+    'Ansi 9 Color',
+    'Ansi 13 Color',
+    'Ansi 11 Color',
+    'Ansi 15 Color'
+  );
+
 implementation
+
+uses ColorPicker;
 
 {$R *.dfm}
 
@@ -145,7 +231,24 @@ begin
   end;
 end;
 
-procedure TForm1.btnApplyClick(Sender: TObject);
+function IsWow64: Boolean;
+type
+  TIsWow64Process = function(hProcess: THandle; var bWow64Process: BOOL):
+BOOL; stdcall;
+var
+  IsWow64Process: TIsWow64Process;
+  bWow64Process: BOOL;
+begin
+  Result := False;
+  @IsWow64Process := GetProcAddress(GetModuleHandle('kernel32.dll'), 'IsWow64Process');
+  if @IsWow64Process <> nil then
+  begin
+    IsWow64Process(GetCurrentProcess(), bWow64Process);
+    Result := bWow64Process;
+  end;
+end;
+
+procedure TfrmMain.btnApplyClick(Sender: TObject);
 var
   Reg: TRegistry;
   I: Integer;
@@ -170,7 +273,122 @@ begin
   end;
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TfrmMain.btnPSPreviewClick(Sender: TObject);
+var
+  IObject: IUnknown;
+  ISLink: IShellLink;
+  ISShell: IShellLinkDataList;
+  dBlock: PNTConsoleProps;
+  pBlock: Pointer;
+  IPFile: IPersistFile;
+  LinkName: string;
+  //Flags: DWORD;
+  Res: HRESULT;
+begin
+  btnColorCmdClick(Sender);
+  LinkName := ExtractFilePath(ParamStr(0)) + 'Windows PowerShell.lnk';
+
+  CoInitialize(nil);
+
+  IObject := CreateComObject(CLSID_ShellLink);
+
+  ISLink := IObject as IShellLink;
+
+  with ISLink do
+  begin
+    SetDescription('Performs object-based (command-line) functions');
+    SetWorkingDirectory('%HOMEDRIVE%%HOMEPATH%');
+    SetPath(PChar('%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe'));
+    //SetArguments(PChar('-NoProfile -Command "Start-Process ''colors.cmd''"'));
+    SetArguments(PChar('-NoExit -Command "'+ExtractFilePath(ParamStr(0))+'colors.cmd"'));
+    //SetPath(PChar('%windir%\system32\cmd.exe'));
+    //SetArguments(PChar('/k "'+ExtractFilePath(ParamStr(0))+'colors.cmd"'));
+  end;
+
+  ISShell := IObject as IShellLinkDataList;
+
+  with ISShell do
+  begin
+    Res := S_FALSE;
+    Res := RemoveDataBlock(NT_CONSOLE_PROPS_SIG);
+
+//    Res := CopyDataBlock(NT_CONSOLE_PROPS_SIG, Pointer(dBlock));
+    if Res = S_OK then
+    begin
+//      RemoveDataBlock(NT_CONSOLE_PROPS_SIG);
+//    end
+//    else
+//    begin
+      New(dBlock);
+      ZeroMemory(dBlock, SizeOf(TNTConsoleProps));
+    end;
+
+    with dBlock^ do
+    begin
+      dbh.cbSize := SizeOf(TNTConsoleProps);
+      dbh.dwSignature := NT_CONSOLE_PROPS_SIG;
+      wFillAttribute := $007;
+      wPopupFillAttribute := $00f5;
+      dwScreenBufferSize.X := 80;
+      dwScreenBufferSize.Y := 25;
+      dwWindowSize.X := 80;
+      dwWindowSize.Y := 25;
+      dwWindowOrigin.X := 110;
+      dwWindowOrigin.Y := 110;
+      nFont := 0;
+      nInputBufferSize := 0;
+      dwFontSize.X := 10;
+      dwFontSize.Y := 14;
+      uFontFamily := 54; //0;
+      uFontWeight := 0;
+      StringToWideChar('AnonymicePowerline NF', PWideChar(@FaceName), LF_FACESIZE);
+      uCursorSize := 2;
+      bFullScreen := False;
+      bQuickEdit := True;
+      bInsertMode := False;
+      bAutoPosition := False;
+      uHistoryBufferSize := 50;
+      uNumberOfHistoryBuffers := 4;
+      bHistoryNoDup := False;
+      ColorTable[0] := col00.Color;
+      ColorTable[1] := col01.Color;
+      ColorTable[2] := col02.Color;
+      ColorTable[3] := col03.Color;
+      ColorTable[4] := col04.Color;
+      ColorTable[5] := col05.Color;
+      ColorTable[6] := col06.Color;
+      ColorTable[7] := col07.Color;
+      ColorTable[8] := col08.Color;
+      ColorTable[9] := col09.Color;
+      ColorTable[10] := col10.Color;
+      ColorTable[11] := col11.Color;
+      ColorTable[12] := col12.Color;
+      ColorTable[13] := col13.Color;
+      ColorTable[14] := col14.Color;
+      ColorTable[15] := col15.Color;
+    end;
+
+    pBlock := dBlock;
+
+    //Res :=
+     AddDataBlock(Pointer(pBlock^));
+    //GetFlags(Flags);
+    //SetFlags(Flags or SLDF_RUNAS_USER);
+  end;
+
+  IPFile := IObject as IPersistFile;
+
+  IPFile.Save(PWideChar(WideString(LinkName)), False);
+
+  Dispose(dBlock);
+
+  CoUninitialize;
+
+  Sleep(100);
+
+  ShellExecute(0, 'OPEN', PChar(LinkName),nil,nil,SW_SHOWNORMAL);end;
+
+procedure TfrmMain.btnColorCmdClick(Sender: TObject);
 var
   OutPutDemo: String;
   Buffer: TStringStream;
@@ -197,7 +415,33 @@ begin
   #13#10+'   echo !line! ' +
   #13#10+') ' +
   #13#10+'echo/ ' +
-  #13#10+'pause ';
+  #13#10+'pause ' +
+  #13#10+'cls' +
+  #13#10+'color 07 ';
+
+  OutPutDemo := '@echo off' +
+  #13#10+'cls' +
+  #13#10+'setlocal EnableDelayedExpansion' +
+  #13#10+'set "CSI=["' +
+  #13#10+'set "T=gYw"' +
+  #13#10+'set "FGs=m 1m"' +
+  #13#10+'echo/                 40m     41m     42m     43m     44m     45m     46m     47m' +
+  #13#10+'for %%f in (%FGs%) do (' +
+  #13#10+'	set "ff=     %%f"' +
+  #13#10+'	set "line= %CSI%0m!ff:~-5! %CSI%%%f  %T%  "' +
+  #13#10+'	for /L %%b in (40,1,47) do set "line=!line! %CSI%%%bm  %T%  %CSI%40m"' +
+  #13#10+'	echo !line!' +
+  #13#10+')' +
+  #13#10+'for /L %%f in (30,1,37) do (' +
+  #13#10+'	set "ff=     %%fm"' +
+  #13#10+'	set "line= %CSI%0m!ff:~-5! %CSI%0;%%fm  %T%  "' +
+  #13#10+'	for /L %%b in (40,1,47) do set "line=!line! %CSI%0;%%f;%%bm  %T%  %CSI%40m"' +
+  #13#10+'	echo !line!' +
+  #13#10+'	set "ff=     1;%%fm"' +
+  #13#10+'	set "line= %CSI%0m!ff:~-5! %CSI%1;%%fm  %T%  "' +
+  #13#10+'	for /L %%b in (40,1,47) do set "line=!line! %CSI%1;%%f;%%bm  %T%  %CSI%40m"' +
+  #13#10+'	echo !line!' +
+  #13#10+')';
 
   if not FileExists(ExtractFilePath(ParamStr(0))+'colors.cmd') then
   begin
@@ -211,10 +455,105 @@ begin
   end;
 
 
-  WinExec(PAnsiChar('cmd /c colors.cmd'), SW_SHOWNORMAL);
+  //WinExec(PAnsiChar('cmd /c colors.cmd'), SW_SHOWNORMAL);
 end;
 
-procedure TForm1.btnNewClick(Sender: TObject);
+procedure TfrmMain.ImportClick(Sender: TObject);
+begin
+
+end;
+
+// Imports ini files used by MSColorTool
+procedure TfrmMain.ImportINIFile(const fname: String);
+  function CSRGB(const csrgb: String): TColor;
+  var
+    line: TStringList;
+    r,g,b: Byte;
+  begin
+    line := TStringList.Create;
+    try
+      line.Text := StringReplace(csrgb,',',#13#10,[rfReplaceAll]);
+      r := StrToInt(line[0]);
+      g := StrToInt(line[1]);
+      b := StrToInt(line[2]);
+    finally
+      line.Free;
+    end;
+    Result := RGB(r,g,b);
+  end;
+var
+  ini: TIniFile;
+  I: Integer;
+begin
+  ini := TIniFile.Create(fname);
+  try
+   for I := 0 to 15 do
+    begin
+      TPanel(FindComponent(Format('col%.*d',[2, I]))).Color := CSRGB(ini.ReadString('table', MSColors[I],''));
+    end;
+  finally
+    ini.Free;
+  end;
+  TextPreview;
+end;
+
+procedure TfrmMain.ImportITermFile(const fname: String);
+var
+  xmlstr: WideString;
+  xml: IXMLDOMDocument;
+  node, sibnode: IXMLDOMNode;
+  nodes_row, nodes_se: IXMLDOMNodeList;
+  I, J: Integer;
+  a,r,g,b: Byte;
+  col: PByte;
+  rcol: Real;
+begin
+  xmlstr := TFile.ReadAllText(fname);
+
+  xml := CreateOleObject('Microsoft.XMLDOM') as IXMLDOMDocument;
+//  xml := CoDOMDocument.Create;
+  xml.async := False;
+
+  xml.loadXML(xmlstr);
+  if xml.parseError.errorCode <> 0 then
+    raise Exception.Create('Corrupt or unsupported iTermFile ' + xml.parseError.reason);
+
+  for I := 0 to 15 do
+  begin
+    node := xml.selectSingleNode('//key[text()="'+iTermColors[I]+'"]');
+    if Assigned(node) then
+    begin
+      sibnode := node.nextSibling; // dict
+      nodes_row := sibnode.childNodes;
+      if Assigned(nodes_row) then
+      begin
+        for J := 0 to nodes_row.length - 1 do
+        begin
+          node := nodes_row.item[J];
+          if node.firstChild.nodeValue = 'Alpha Component' then
+            col := @a;
+          if node.firstChild.nodeValue = 'Blue Component' then
+            col := @b;
+          if node.firstChild.nodeValue = 'Green Component' then
+            col := @g;
+          if node.firstChild.nodeValue = 'Red Component' then
+            col := @r;
+          if node.nodeName = 'real' then
+          begin
+            rcol := StrToFloat(StringReplace(node.firstChild.nodeValue,'.',',',[rfReplaceAll]));
+            col^ := Trunc(255*rcol);
+          end;
+        end;
+      end;
+      TPanel(FindComponent(Format('col%.*d',[2, I]))).Color := RGB(r,g,b);
+    end;
+
+  end;
+
+  TextPreview;
+end;
+
+procedure TfrmMain.btnNewClick(Sender: TObject);
 var
   fname: String;
   ini: TIniFile;
@@ -265,7 +604,7 @@ begin
   LoadColor(ComboBox1.Text);
 end;
 
-procedure TForm1.btnSaveClick(Sender: TObject);
+procedure TfrmMain.btnSaveClick(Sender: TObject);
 var
   ini : TIniFile;
   I: Integer;
@@ -286,14 +625,123 @@ begin
   end;
 end;
 
-procedure TForm1.btnReloadClick(Sender: TObject);
+procedure TfrmMain.buttonOpenMenuClick(Sender: TObject);
+var
+  DPI: Single;
+  AniWidth: Integer;
 begin
-  //ComboBox1Change(Sender);
-  LoadColor(ComboBox1.Text);
+  DPI := PPI / 96;
+  AniWidth := Round((175 - 45 ) * DPI);
+  if drawerNavigation.Width <> Round(45 * DPI) then
+    AniWidth := - AniWidth;
 
+  drawerNavigation.AnimationFromCurrent(apWidth, AniWidth, 20, 200, akOut, afkQuartic, nil);
 end;
 
-procedure TForm1.btnDeleteClick(Sender: TObject);
+procedure TfrmMain.btnCmdPreviewClick(Sender: TObject);
+var
+  IObject: IUnknown;
+  ISLink: IShellLink;
+  ISShell: IShellLinkDataList;
+  dBlock: PNTConsoleProps;
+  pBlock: Pointer;
+  IPFile: IPersistFile;
+  LinkName: string;
+  Res: HRESULT;
+begin
+  btnColorCmdClick(Sender);
+  LinkName := ExtractFilePath(ParamStr(0)) + 'Command Prompt.lnk';
+
+  CoInitialize(nil);
+
+  IObject := CreateComObject(CLSID_ShellLink);
+
+  ISLink := IObject as IShellLink;
+
+  with ISLink do
+  begin
+    SetDescription('Performs text-based (command-line) functions');
+    SetWorkingDirectory('%HOMEDRIVE%%HOMEPATH%');
+    SetPath(PChar('%windir%\system32\cmd.exe'));
+    //prompt $E[0;45m$p$E[0;35m $_$E[0;31m$$[$E[0;35m$t$E[0;31m]λ$E[0;37m
+    SetArguments(PChar('/k "'+ExtractFilePath(ParamStr(0))+'colors.cmd&prompt $E[0;45m$p$E[0;35m $_$E[0;31m$$[$E[0;35m$t$E[0;31m]λ$E[0;37m"'));
+  end;
+
+  ISShell := IObject as IShellLinkDataList;
+
+  with ISShell do
+  begin
+    Res := S_FALSE;
+    Res := RemoveDataBlock(NT_CONSOLE_PROPS_SIG);
+    if Res = S_OK then
+    begin
+      New(dBlock);
+      ZeroMemory(dBlock, SizeOf(TNTConsoleProps));
+    end;
+
+    with dBlock^ do
+    begin
+      dbh.cbSize := SizeOf(TNTConsoleProps);
+      dbh.dwSignature := NT_CONSOLE_PROPS_SIG;
+      wFillAttribute := $007;
+      wPopupFillAttribute := $00f5;
+      dwScreenBufferSize.X := 80;
+      dwScreenBufferSize.Y := 25;
+      dwWindowSize.X := 80;
+      dwWindowSize.Y := 25;
+      dwWindowOrigin.X := 110;
+      dwWindowOrigin.Y := 110;
+      nFont := 0;
+      nInputBufferSize := 0;
+      dwFontSize.X := 10;
+      dwFontSize.Y := 14;
+      uFontFamily := 54; //0;
+      uFontWeight := 0;
+      StringToWideChar('AnonymicePowerline NF', PWideChar(@FaceName), LF_FACESIZE);
+      uCursorSize := 2;
+      bFullScreen := False;
+      bQuickEdit := True;
+      bInsertMode := False;
+      bAutoPosition := False;
+      uHistoryBufferSize := 50;
+      uNumberOfHistoryBuffers := 4;
+      bHistoryNoDup := False;
+      ColorTable[0] := col00.Color;
+      ColorTable[1] := col01.Color;
+      ColorTable[2] := col02.Color;
+      ColorTable[3] := col03.Color;
+      ColorTable[4] := col04.Color;
+      ColorTable[5] := col05.Color;
+      ColorTable[6] := col06.Color;
+      ColorTable[7] := col07.Color;
+      ColorTable[8] := col08.Color;
+      ColorTable[9] := col09.Color;
+      ColorTable[10] := col10.Color;
+      ColorTable[11] := col11.Color;
+      ColorTable[12] := col12.Color;
+      ColorTable[13] := col13.Color;
+      ColorTable[14] := col14.Color;
+      ColorTable[15] := col15.Color;
+    end;
+
+    pBlock := dBlock;
+
+    AddDataBlock(Pointer(pBlock^));
+  end;
+
+  IPFile := IObject as IPersistFile;
+
+  IPFile.Save(PWideChar(WideString(LinkName)), False);
+
+  Dispose(dBlock);
+
+  CoUninitialize;
+
+  Sleep(100);
+
+  ShellExecute(0, 'OPEN', PChar(LinkName),nil,nil,SW_SHOWNORMAL);end;
+
+procedure TfrmMain.btnDeleteClick(Sender: TObject);
 begin
   if MessageDlg('This procedure cannot be undone'
   +#13'Do you really want to delete "'+ComboBox1.Items[ComboBox1.ItemIndex]+'" color scheme?',mtConfirmation,[mbYes,mbNo], 0) = mrYes then
@@ -313,7 +761,23 @@ begin
   end;
 end;
 
-procedure TForm1.btnResetCmdClick(Sender: TObject);
+procedure TfrmMain.btnImportClick(Sender: TObject);
+begin
+  OpenDialog1.Filter := 'Microsoft ColorTool|*.ini|iTerm Colors|*.itermcolors|Registry Files|*.reg';
+
+  if OpenDialog1.Execute then
+  begin
+    if ExtractFileExt(OpenDialog1.FileName) = '.itermcolors' then
+      ImportITermFile(OpenDialog1.FileName)
+    else if ExtractFileExt(OpenDialog1.FileName) = '.ini' then
+      ImportINIFile(OpenDialog1.FileName)
+    else
+      ImportRegfile(OpenDialog1.FileName);
+  end;
+
+end;
+
+procedure TfrmMain.btnResetCmdClick(Sender: TObject);
 var
   reg: TRegistry;
 begin
@@ -330,7 +794,7 @@ begin
   end;
 end;
 
-procedure TForm1.ComboBox1Change(Sender: TObject);
+procedure TfrmMain.ComboBox1Change(Sender: TObject);
 var
   ini: TIniFile;
   I: Integer;
@@ -370,27 +834,31 @@ begin
   TextPreview;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   CollectionHash := TStringList.Create;
 
   ColorsPaths :=  ExtractFilePath(ParamStr(0))+COLORSPATH+'\';
+
+  ListRegisteredShells;
 
   LoadColorsFromRegistry;
 
   UpdateCollectionList;
 
   TextPreview;
+
+  ThemeManager := UThemeManager1;
 end;
 
-procedure TForm1.FormDestroy(Sender: TObject);
+procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
   CollectionHash.Free;
 end;
 
 // It will hash colors as written in registry, so it will match easier on
 // collection files to match with
-function TForm1.HashColors: String;
+function TfrmMain.HashColors: String;
 var
   ConcatenatedColors: AnsiString;
   I: Integer;
@@ -405,7 +873,83 @@ begin
   Result := IntToStr(HashName(PAnsiChar(ConcatenatedColors)));
 end;
 
-procedure TForm1.LoadColor(const fname: String);
+procedure TfrmMain.ImportRegfile(const fname: String);
+var
+  I: Integer;
+  list: TStringList;
+  analize: Boolean;
+  line: String;
+  hexColor: String;
+  colNo: String;
+begin
+  analize := False;
+  list := TStringList.Create;
+  try
+    list.LoadFromFile(fname);
+    // analize line by line
+    if Pos('Windows Registry Editor', list[0]) = 1 then
+    begin
+      for I := 1 to list.Count - 2 do
+      begin
+        if analize then
+        begin
+          if Pos('"ColorTable', list[I]) = 1 then
+          begin
+            line := StringReplace(list[I],' ', '', [rfReplaceAll]);
+            if Pos('=dword:', line) > 1 then
+            begin
+              colNo:= Copy(line,12 ,2);
+              hexColor := '$'+Copy(line,22,8);
+
+              TPanel(FindComponent('col'+colNo)).Color := StrToInt(hexColor);
+            end;
+          end;
+        end;
+        if Pos('[HKEY_CURRENT_USER\Console]', list[I]) = 1 then
+          analize := True;
+      end;
+    end;
+  finally
+    list.Free;
+  end;
+  TextPreview;
+end;
+
+procedure TfrmMain.ListRegisteredShells;
+var
+  reg: TRegistry;
+  list: TStringList;
+  I: Integer;
+begin
+  reg := TRegistry.Create;
+  try
+    reg.RootKey := HKEY_CURRENT_USER;
+
+    if reg.OpenKey('Console', False) then
+    begin
+      list := TStringList.Create;
+      try
+        reg.GetKeyNames(list);
+
+        ListBox1.Items.BeginUpdate;
+        ListBox1.Items.Clear;
+        for I := 0 to list.Count - 1 do
+        begin
+          ListBox1.Items.Add(list[I]);
+        end;
+        ListBox1.Items.EndUpdate;
+
+        reg.CloseKey;
+      finally
+        list.Free;
+      end;
+    end;
+  finally
+    reg.Free;
+  end;
+end;
+
+procedure TfrmMain.LoadColor(const fname: String);
 var
   ini: TIniFile;
   I: Integer;
@@ -429,7 +973,7 @@ begin
   TextPreview;
 end;
 
-procedure TForm1.LoadColorsFromRegistry;
+procedure TfrmMain.LoadColorsFromRegistry;
 var
   Reg: TRegistry;
   I: Integer;
@@ -455,7 +999,7 @@ begin
 
 end;
 
-procedure TForm1.LoadDefaultColors;
+procedure TfrmMain.LoadDefaultColors;
 var
   I: Integer;
 begin
@@ -465,7 +1009,7 @@ begin
   end;
 end;
 
-procedure TForm1.LoadLegacyColors;
+procedure TfrmMain.LoadLegacyColors;
 var
   I: Integer;
 begin
@@ -475,7 +1019,7 @@ begin
   end;
 end;
 
-procedure TForm1.PickColor(Sender: TObject; Button: TMouseButton;
+procedure TfrmMain.PickColor(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var
   CurColor: TColor;
@@ -500,23 +1044,37 @@ begin
     end;
     //else
     begin
-      ColorDialog1.Options := [cdFullOpen, cdAnyColor];
+      frmColorPicker.AlphaMode := False;
+
+      frmColorPicker.SetColor(CurColor,255, False);
+      frmColorPicker.SetColor(CurColor,255, True);
+
+      frmColorPicker.Caption := 'Pick a color';
+
+      frmColorPicker.Left := Left + Panel1.Left + TPanel(Sender).Left;
+      frmColorPicker.Top := Top + Panel1.Top + 30;
+      if frmColorPicker.ShowModal = mrOk then
+      begin
+        TPanel(Sender).Color := frmColorPicker.GetColor;
+        TextPreview;
+      end;
+      {ColorDialog1.Options := [cdFullOpen, cdAnyColor];
       ColorDialog1.Color := CurColor;
       if ColorDialog1.Execute then
       begin
         TPanel(Sender).Color := ColorDialog1.Color;
-      end;
+      end;}
     end;
   end;
 
-  TextPreview;
 end;
 
-procedure TForm1.TextPreview;
+procedure TfrmMain.TextPreview;
 var
   I: Integer;
   J: Integer;
 begin
+  RichEdit1.Lines.BeginUpdate;
   RichEdit1.Color := col00.Color;
   RichEdit1.Font.Color := col07.Color;
   RichEdit1.Font.Name := 'Consolas';
@@ -540,12 +1098,10 @@ begin
     end;
     RichEdit1.SelText := #13#10;
   end;
-
-
-
+  RichEdit1.Lines.EndUpdate;
 end;
 
-procedure TForm1.Timer1Timer(Sender: TObject);
+procedure TfrmMain.Timer1Timer(Sender: TObject);
 var
   reg: TRegistry;
 begin
@@ -561,12 +1117,37 @@ begin
   end;
 end;
 
-procedure TForm1.UpdateCollectionIndex;
+procedure TfrmMain.btnReloadClick(Sender: TObject);
+begin
+  //ComboBox1Change(Sender);
+  LoadColor(ComboBox1.Text);
+
+end;
+
+procedure TfrmMain.UButton1Click(Sender: TObject);
+begin
+  close
+end;
+
+procedure TfrmMain.UButton2Click(Sender: TObject);
+begin
+  if WindowState = wsNormal then
+    WindowState := wsMaximized
+  else
+    WindowState := wsNormal;
+end;
+
+procedure TfrmMain.UButton3Click(Sender: TObject);
+begin
+  WindowState := wsMinimized;
+end;
+
+procedure TfrmMain.UpdateCollectionIndex;
 begin
   ComboBox1.ItemIndex := CollectionHash.IndexOf(CurrentColorsHash);
 end;
 
-procedure TForm1.UpdateCollectionList;
+procedure TfrmMain.UpdateCollectionList;
 var
   dir: TSearchRec;
   ini: TIniFile;
@@ -607,6 +1188,80 @@ begin
   ComboBox1.Items.EndUpdate;
 
   ComboBox1.ItemIndex := CollectionHash.IndexOf(CurrentColorsHash);
+
+end;
+
+procedure TfrmMain.USymbolButton1Click(Sender: TObject);
+const
+  WindowsTerminalPath = 'Microsoft.WindowsTerminal_0.4.2382.0_x64__8wekyb3d8bbwe';
+var
+reg: TRegistry;
+  lista: TStringList;
+  I,J,K: Integer;
+
+  programfiles: String;
+  xml: IXMLDOMDocument2;
+  node: IXMLDOMNode;
+  nodes_row, nodes_se: IXMLDOMNodeList;
+
+  xmlstr: WideString;
+  name, vers, arqt, appid: string;
+  appUserModelID: string;
+
+  LogoDefaultPath, LogoNewPath: String;
+  pnglogo: TPngImage;
+  bmpout: TBitmap;
+
+  outBuff: array[0..1023] of widechar;// PWideString;
+  intptrzero: Pointer;
+  priPath : String;
+  resourceKey: String;
+  tmpstr: string;
+
+  tmpstrlst : TStringList;
+  InstallLocation: String;
+begin
+  if IsWow64 then
+    programfiles := GetEnvironmentVariable('PROGRAMW6432')
+  else
+    programfiles := GetEnvironmentVariable('PROGRAMFILES');
+
+  if FileExists(programfiles + '\WindowsApps\' + WindowsTerminalPath + '\AppxManifest.xml') then
+  begin
+    xmlstr := TFile.ReadAllText(programfiles + '\WindowsApps\' + WindowsTerminalPath + '\AppxManifest.xml');
+
+    xml := CreateOleObject('Microsoft.XMLDOM') as IXMLDOMDocument2;
+    xml.async := False;
+
+    xml.loadXML(xmlstr);
+    if xml.parseError.errorCode <> 0 then
+      raise Exception.Create('XML Load Error: ' + xml.parseError.reason);
+
+    InstallLocation := programfiles + '\WindowsApps\' + WindowsTerminalPath;
+
+    nodes_row := xml.selectNodes('/Package');
+
+    for I := 0 to nodes_row.length - 1 do
+    begin
+      node := nodes_row.item[I];
+      name := node.selectSingleNode('Identity').attributes.getNamedItem('Name').text;
+      vers := node.selectSingleNode('Identity').attributes.getNamedItem('Version').text;
+      arqt := node.selectSingleNode('Identity').attributes.getNamedItem('ProcessorArchitecture').text;
+
+      nodes_se := node.selectNodes('Applications');
+      for J := 0 to nodes_se.length - 1 do
+      begin
+        node := nodes_se.item[J];
+        appid := node.selectSingleNode('Application').attributes.getNamedItem('Id').text;
+        appUserModelID := name + Copy(WindowsTerminalPath, StrLen(PChar(name + '_' + vers + '_' + arqt + '_')) + 1,
+                          StrLen(PChar(WindowsTerminalPath)) - StrLen(PChar(name + '_' + vers + '_' + arqt + '_')) )
+                          + '!' + appid;
+      end;
+    end;
+
+    //ShellExecute(0, 'OPEN', PChar(InstallLocation), nil, nil, SW_SHOWNORMAL);
+    ShellExecute(0, 'OPEN', PChar('shell:AppsFolder\' + appUserModelID), nil, nil, SW_SHOWNORMAL);
+  end;
 
 end;
 
