@@ -43,7 +43,9 @@ uses
   Vcl.ComCtrls, Winapi.Richedit, IniFiles, Vcl.Menus, ShlObj, Activex, ComObj, ShellApi,
   System.ImageList, Vcl.ImgList, MSXML, IOUtils, UCL.TUCaptionBar, UCL.TUForm,
   UCL.TUThemeManager, UCL.TUSymbolButton, UCL.TUPanel, UCL.IntAnimation, UCL.IntAnimation.Helpers,
-  UCL.TUButton, UCL.TUScrollBox, pngimage;
+  UCL.TUButton, UCL.TUScrollBox, pngimage, System.Generics.Collections,
+  UCL.TUCheckBox, UCL.TUText, UCL.TUPopupMenu, UCL.TUEdit, UCL.TUSlider, functions,
+  UCL.TURadioButton, System.JSON, UCL.TUQuickButton, ES.BaseControls, ES.Switch;
 
 type
 
@@ -57,9 +59,9 @@ type
   public
     property BackColor: TColor read GetBackColor write SetBackColor;
   end;
+
   TfrmMain = class(TUForm)
     ColorDialog1: TColorDialog;
-    Panel1: TPanel;
     GridPanel1: TGridPanel;
     col00: TPanel;
     col01: TPanel;
@@ -84,9 +86,7 @@ type
     btnResetCmd: TButton;
     Timer1: TTimer;
     OpenDialog1: TOpenDialog;
-    ListBox1: TListBox;
     ImageList1: TImageList;
-    Button1: TButton;
     UCaptionBar1: TUCaptionBar;
     UThemeManager1: TUThemeManager;
     drawerNavigation: TUPanel;
@@ -106,10 +106,115 @@ type
     btnApply: TUButton;
     UScrollBox1: TUScrollBox;
     USymbolButton1: TUSymbolButton;
-    UButton4: TUButton;
-    UButton3: TUButton;
-    UButton2: TUButton;
-    UButton1: TUButton;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    cbConsoles: TComboBox;
+    Label2: TLabel;
+    btnClear: TUButton;
+    UText1: TUText;
+    UCheckBox1: TUCheckBox;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    UText2: TUText;
+    UText3: TUText;
+    UText4: TUText;
+    UText5: TUText;
+    HotKey1: THotKey;
+    UScrollBox2: TUScrollBox;
+    HotKey2: THotKey;
+    HotKey3: THotKey;
+    HotKey4: THotKey;
+    HotKey5: THotKey;
+    HotKey6: THotKey;
+    HotKey7: THotKey;
+    HotKey8: THotKey;
+    HotKey9: THotKey;
+    HotKey10: THotKey;
+    HotKey11: THotKey;
+    HotKey12: THotKey;
+    HotKey13: THotKey;
+    HotKey14: THotKey;
+    HotKey15: THotKey;
+    HotKey16: THotKey;
+    HotKey17: THotKey;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    HotKey18: THotKey;
+    HotKey19: THotKey;
+    HotKey20: THotKey;
+    HotKey21: THotKey;
+    HotKey22: THotKey;
+    HotKey23: THotKey;
+    HotKey24: THotKey;
+    HotKey25: THotKey;
+    HotKey26: THotKey;
+    HotKey27: THotKey;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    Label29: TLabel;
+    UText6: TUText;
+    UText7: TUText;
+    UText8: TUText;
+    UEdit1: TUEdit;
+    UText9: TUText;
+    UEdit2: TUEdit;
+    UCheckBox2: TUCheckBox;
+    UCheckBox3: TUCheckBox;
+    UEdit3: TUEdit;
+    UEdit4: TUEdit;
+    UEdit5: TUEdit;
+    USymbolButton2: TUSymbolButton;
+    TabSheet6: TTabSheet;
+    UText10: TUText;
+    USlider1: TUSlider;
+    UText11: TUText;
+    UText12: TUText;
+    UEdit6: TUEdit;
+    UText13: TUText;
+    UCheckBox4: TUCheckBox;
+    USymbolButton3: TUSymbolButton;
+    UText14: TUText;
+    UEdit7: TUEdit;
+    UEdit8: TUEdit;
+    UEdit9: TUEdit;
+    USymbolButton4: TUSymbolButton;
+    ComboBox2: TComboBox;
+    USlider2: TUSlider;
+    USlider3: TUSlider;
+    URadioButton1: TURadioButton;
+    URadioButton2: TURadioButton;
+    URadioButton3: TURadioButton;
+    UQuickButton1: TUQuickButton;
+    UQuickButton2: TUQuickButton;
+    UQuickButton3: TUQuickButton;
+    UQuickButton4: TUQuickButton;
+    ListBox1: TListBox;
+    tmrDetectWt: TTimer;
+    UText15: TUText;
     procedure PickColor(Sender: TObject; Button: TMouseButton;
               Shift: TShiftState; X, Y: Integer);
     procedure FormCreate(Sender: TObject);
@@ -129,9 +234,19 @@ type
     procedure btnReloadClick(Sender: TObject);
     procedure btnImportClick(Sender: TObject);
     procedure USymbolButton1Click(Sender: TObject);
-    procedure UButton1Click(Sender: TObject);
     procedure UButton2Click(Sender: TObject);
     procedure UButton3Click(Sender: TObject);
+    procedure btnClearClick(Sender: TObject);
+    procedure buttonMenuOpenClick(Sender: TObject);
+    procedure buttonMenuSettingsClick(Sender: TObject);
+    procedure buttonMenuSaveClick(Sender: TObject);
+    procedure buttonMenuProfileClick(Sender: TObject);
+    procedure buttonMenuRateClick(Sender: TObject);
+    procedure USymbolButton2Click(Sender: TObject);
+    procedure USymbolButton3Click(Sender: TObject);
+    procedure ComboBox2Select(Sender: TObject);
+    procedure tmrDetectWtTimer(Sender: TObject);
+    procedure ListBox1DblClick(Sender: TObject);
   private
     { Private declarations }
     procedure LoadDefaultColors;
@@ -146,6 +261,10 @@ type
     procedure ImportITermFile(const fname: String);
     procedure ImportINIFile(const fname: String);
     procedure ListRegisteredShells;
+    procedure LoadWinTermSettings;
+    function DetectWindowsTerminal: boolean;
+  protected
+    procedure CreateParams(var Params: TCreateParams); override;
   public
     { Public declarations }
   end;
@@ -154,6 +273,7 @@ const
   COLORSPATH = 'collection';
 var
   frmMain: TfrmMain;
+  AeroApplied: Boolean = False;
   ColorsPaths: String;
 
   //ColorTable00 to ColorTable15 on HKCU\Console\ REG_DWORD
@@ -252,11 +372,22 @@ procedure TfrmMain.btnApplyClick(Sender: TObject);
 var
   Reg: TRegistry;
   I: Integer;
+  shell: String;
 begin
   Reg := TRegistry.Create;
   try
     Reg.RootKey := HKEY_CURRENT_USER;
-    if Reg.OpenKey('\Console',true) then
+
+    shell := StringReplace(cbConsoles.Text, '\', '_', [rfReplaceAll]);
+
+    if cbConsoles.Text = 'Global' then
+    begin
+      shell := '';
+      if MessageDlg('Modifying global colors is not recommended!'#13#13'It will only affect those console shells without custom colors or new ones.'#13#13'It is recommended to apply colors to each one.', mtConfirmation, mbYesNo, 0) = mrNo then
+        Exit;
+    end;
+
+    if Reg.OpenKey('\Console\' + shell ,true) then
     begin
       for I := 0 to 15 do
       begin
@@ -267,6 +398,8 @@ begin
       end;
       Reg.CloseKey;
     end;
+
+    MessageDlg('Colors applied successfully to '+ shell, mtInformation, [mbOK], 0);
 
   finally
     Reg.Free;
@@ -625,6 +758,31 @@ begin
   end;
 end;
 
+procedure TfrmMain.buttonMenuOpenClick(Sender: TObject);
+begin
+  PageControl1.ActivePage := TabSheet1;
+end;
+
+procedure TfrmMain.buttonMenuProfileClick(Sender: TObject);
+begin
+  PageControl1.ActivePage := TabSheet4;
+end;
+
+procedure TfrmMain.buttonMenuRateClick(Sender: TObject);
+begin
+  PageControl1.ActivePage := TabSheet6;
+end;
+
+procedure TfrmMain.buttonMenuSaveClick(Sender: TObject);
+begin
+  PageControl1.ActivePage := TabSheet3;
+end;
+
+procedure TfrmMain.buttonMenuSettingsClick(Sender: TObject);
+begin
+  PageControl1.ActivePage := TabSheet2;
+end;
+
 procedure TfrmMain.buttonOpenMenuClick(Sender: TObject);
 var
   DPI: Single;
@@ -834,6 +992,31 @@ begin
   TextPreview;
 end;
 
+procedure TfrmMain.ComboBox2Select(Sender: TObject);
+begin
+  USymbolButton3.Text := ComboBox2.Text;
+  ComboBox2.Visible := False;
+end;
+
+procedure TfrmMain.CreateParams(var Params: TCreateParams);
+var
+  AeroEnabled: LongBool;
+begin
+  inherited;
+
+  AeroEnabled := False;
+  if (Win32MajorVersion >= 6) and not AeroApplied then
+  begin
+    AeroApplied := True;
+    EnableBlur(Handle);
+  end;
+end;
+
+function TfrmMain.DetectWindowsTerminal: boolean;
+begin
+  //
+end;
+
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   CollectionHash := TStringList.Create;
@@ -849,6 +1032,13 @@ begin
   TextPreview;
 
   ThemeManager := UThemeManager1;
+
+  TabSheet1.TabVisible := False;
+  TabSheet2.TabVisible := False;
+  TabSheet3.TabVisible := False;
+  TabSheet4.TabVisible := False;
+  TabSheet5.TabVisible := False;
+  TabSheet6.TabVisible := False;
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -915,6 +1105,27 @@ begin
   TextPreview;
 end;
 
+procedure TfrmMain.ListBox1DblClick(Sender: TObject);
+var
+  str: TStringList;
+begin
+  if (ListBox1.ItemIndex >= 0) and (ListBox1.ItemIndex < ListBox1.Items.Count) then
+  begin
+    str := TStringList.Create;
+    try
+      str.Delimiter := '-';
+      str.StrictDelimiter := True;
+      str.DelimitedText := ListBox1.Items[ListBox1.ItemIndex];
+      if str.Count > 0 then
+      begin
+        SetForegroundWindow(StrToInt(Trim(str[0])));
+      end;
+    finally
+      str.Free;
+    end;
+  end;
+end;
+
 procedure TfrmMain.ListRegisteredShells;
 var
   reg: TRegistry;
@@ -931,19 +1142,23 @@ begin
       try
         reg.GetKeyNames(list);
 
-        ListBox1.Items.BeginUpdate;
-        ListBox1.Items.Clear;
+        cbConsoles.Items.BeginUpdate;
+        cbConsoles.Items.Clear;
+
+        cbConsoles.Items.Add('Global');
         for I := 0 to list.Count - 1 do
         begin
-          ListBox1.Items.Add(list[I]);
+          cbConsoles.Items.Add( StringReplace(list[I], '_', '\', [rfReplaceAll]) );
         end;
-        ListBox1.Items.EndUpdate;
+        cbConsoles.Items.EndUpdate;
 
         reg.CloseKey;
       finally
         list.Free;
       end;
     end;
+
+    cbConsoles.ItemIndex := 0;
   finally
     reg.Free;
   end;
@@ -1019,6 +1234,24 @@ begin
   end;
 end;
 
+procedure TfrmMain.LoadWinTermSettings;
+var
+  JSObj: TJSONObject;
+  JSVal: TJSONValue;
+  st:String;
+  Br: String;
+begin
+  JSObj := TJSONObject.Create;
+  try
+
+  finally
+    JSObj.Free;
+  end;
+  JSVal := TJSONObject.ParseJSONValue(st);
+  br := JSVal.GetValue<String>('');
+  JsVal.Free;
+end;
+
 procedure TfrmMain.PickColor(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var
@@ -1051,8 +1284,8 @@ begin
 
       frmColorPicker.Caption := 'Pick a color';
 
-      frmColorPicker.Left := Left + Panel1.Left + TPanel(Sender).Left;
-      frmColorPicker.Top := Top + Panel1.Top + 30;
+      frmColorPicker.Left := Left + RichEdit1.Left + TPanel(Sender).Left;
+      frmColorPicker.Top := Top + RichEdit1.Top + 30;
       if frmColorPicker.ShowModal = mrOk then
       begin
         TPanel(Sender).Color := frmColorPicker.GetColor;
@@ -1117,16 +1350,52 @@ begin
   end;
 end;
 
+procedure TfrmMain.tmrDetectWtTimer(Sender: TObject);
+var
+  LHDesktop: HWND;
+  LHWindow: HWND;
+  LHParent: HWND;
+  LExStyle: DWORD;
+  AppClassName: array[0..255] of char;
+  titleLength: Integer;
+  title: string;
+begin
+  LHDesktop:=GetDesktopWindow;
+  LHWindow:=GetWindow(LHDesktop,GW_CHILD);
+  ListBox1.Clear;
+  while LHWindow <> 0 do
+  begin
+    GetClassName(LHWindow, AppClassName, 255);
+//    if AppClassName = 'ApplicationFrameWindow' then
+//      EnumPropsEx(LHWindow, @MyEnumProc , 0);
+    LHParent:=GetWindowLong(LHWindow,GWL_HWNDPARENT);
+    LExStyle:=GetWindowLong(LHWindow,GWL_EXSTYLE);
+
+    if IsWindowVisible(LHWindow)
+    and (GetProp(LHWindow, 'ITaskList_Deleted') = 0)
+    and (AppClassName = 'CASCADIA_HOSTING_WINDOW_CLASS')
+    //and not ((AppClassName = 'ApplicationFrameWindow') and not uwpidle)
+    and ((LHParent=0)or(LHParent=LHDesktop))
+    and (Application.Handle<>LHWindow)
+    and ((LExStyle and WS_EX_TOOLWINDOW = 0)or(LExStyle and WS_EX_APPWINDOW <> 0))
+    then
+    begin
+      titleLength := GetWindowTextLength(LHWindow);
+      SetLength(title, titlelength);
+      GetWindowText(LHWindow, PChar(title), titleLength + 1);
+      title := PChar(title);
+      ListBox1.Items.Add(IntToStr(LHWindow)+ ' - ' + title);
+    end;
+    LHWindow:=GetWindow(LHWindow, GW_HWNDNEXT);
+  end;
+
+end;
+
 procedure TfrmMain.btnReloadClick(Sender: TObject);
 begin
   //ComboBox1Change(Sender);
   LoadColor(ComboBox1.Text);
 
-end;
-
-procedure TfrmMain.UButton1Click(Sender: TObject);
-begin
-  close
 end;
 
 procedure TfrmMain.UButton2Click(Sender: TObject);
@@ -1140,6 +1409,57 @@ end;
 procedure TfrmMain.UButton3Click(Sender: TObject);
 begin
   WindowState := wsMinimized;
+end;
+
+procedure TfrmMain.btnClearClick(Sender: TObject);
+const
+  // default colors for powershell
+  PowerShellColor05 = $562401;
+  PowerShellColor06 = $f0edee;
+var
+  Reg: TRegistry;
+  I: Integer;
+  shell: String;
+begin
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_CURRENT_USER;
+
+    shell := StringReplace(cbConsoles.Text, '\', '_', [rfReplaceAll]);
+
+    if cbConsoles.Text = 'Global' then
+    begin
+      MessageDlg('You shouldn''t clear global colors, it is not recommended. It only clears each console''s colors.'#13#13'Instead apply Default Colors scheme.', mtWarning, [mbOK], 0);
+      Exit;
+    end;
+
+    if Reg.OpenKey('\Console\' + shell ,true) then
+    begin
+      for I := 0 to 15 do
+      begin
+        if (I = 5) or (I = 6) then
+        begin
+          if Pos('powershell.exe', shell) > 0 then
+          begin
+            if I = 5 then
+              Reg.WriteInteger(Format('ColorTable%.*d',[2, I]),PowerShellColor05)
+            else
+              Reg.WriteInteger(Format('ColorTable%.*d',[2, I]),PowerShellColor06);
+          end
+          else
+            Reg.DeleteValue(Format('ColorTable%.*d',[2, I]));
+        end
+        else
+          Reg.DeleteValue(Format('ColorTable%.*d',[2, I]));
+      end;
+      Reg.CloseKey;
+    end;
+
+    MessageDlg('Colors cleared successfully for '+ shell, mtInformation, [mbOK], 0);
+
+  finally
+    Reg.Free;
+  end;
 end;
 
 procedure TfrmMain.UpdateCollectionIndex;
@@ -1192,10 +1512,9 @@ begin
 end;
 
 procedure TfrmMain.USymbolButton1Click(Sender: TObject);
-const
-  WindowsTerminalPath = 'Microsoft.WindowsTerminal_0.4.2382.0_x64__8wekyb3d8bbwe';
 var
-reg: TRegistry;
+  WindowsTerminalPath: String;
+  reg: TRegistry;
   lista: TStringList;
   I,J,K: Integer;
 
@@ -1226,6 +1545,29 @@ begin
   else
     programfiles := GetEnvironmentVariable('PROGRAMFILES');
 
+  // detect if windows terminal uwp is installed
+  reg := TRegistry.Create;
+  lista := TStringList.Create;
+  try
+    reg.RootKey := HKEY_CURRENT_USER;
+    reg.OpenKeyReadOnly('Software\Classes\ActivatableClasses\Package');
+    reg.GetKeyNames(lista);
+    for I := 0 to lista.Count - 1 do
+    begin
+      if Pos('Microsoft.WindowsTerminal_', lista[I]) > 0 then
+      begin
+        WindowsTerminalPath := lista[I];
+        Break;
+      end;
+    end;
+
+  finally
+    lista.Free;
+    reg.Free;
+  end;
+
+  InstallLocation := programfiles + '\WindowsApps\' + WindowsTerminalPath;
+
   if FileExists(programfiles + '\WindowsApps\' + WindowsTerminalPath + '\AppxManifest.xml') then
   begin
     xmlstr := TFile.ReadAllText(programfiles + '\WindowsApps\' + WindowsTerminalPath + '\AppxManifest.xml');
@@ -1236,8 +1578,6 @@ begin
     xml.loadXML(xmlstr);
     if xml.parseError.errorCode <> 0 then
       raise Exception.Create('XML Load Error: ' + xml.parseError.reason);
-
-    InstallLocation := programfiles + '\WindowsApps\' + WindowsTerminalPath;
 
     nodes_row := xml.selectNodes('/Package');
 
@@ -1263,6 +1603,17 @@ begin
     ShellExecute(0, 'OPEN', PChar('shell:AppsFolder\' + appUserModelID), nil, nil, SW_SHOWNORMAL);
   end;
 
+end;
+
+procedure TfrmMain.USymbolButton2Click(Sender: TObject);
+begin
+  PageControl1.ActivePage := TabSheet5;
+end;
+
+procedure TfrmMain.USymbolButton3Click(Sender: TObject);
+begin
+  ComboBox2.Visible := True;
+  ComboBox2.DroppedDown := True;
 end;
 
 { TRicheEdit }

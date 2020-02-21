@@ -1,9 +1,8 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Console Color Editor v1.0'
-  ClientHeight = 485
+  ClientHeight = 611
   ClientWidth = 801
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,10 +19,6 @@ object frmMain: TfrmMain
     Left = 0
     Top = 0
     Width = 801
-    Height = 32
-    ThemeManager = UThemeManager1
-    Align = alTop
-    BevelOuter = bvNone
     Caption = 'Console Color'
     Color = 15921906
     Font.Charset = DEFAULT_CHARSET
@@ -34,132 +29,88 @@ object frmMain: TfrmMain
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    object UButton4: TUButton
+    ThemeManager = UThemeManager1
+    BackColor.Enabled = False
+    BackColor.Color = clBlack
+    BackColor.LightColor = 15921906
+    BackColor.DarkColor = 2829099
+    object UQuickButton1: TUQuickButton
+      Left = 756
+      Top = 0
+      ButtonStyle = sbsQuit
+      LightColor = 2298344
+      DarkColor = 2298344
+      PressBrightnessDelta = 32
+      Align = alRight
+      Caption = #57606
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe MDL2 Assets'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 769
+    end
+    object UQuickButton2: TUQuickButton
+      Left = 711
+      Top = 0
+      ButtonStyle = sbsMax
+      LightColor = 13619151
+      DarkColor = 3947580
+      PressBrightnessDelta = -32
+      Align = alRight
+      Caption = #57347
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe MDL2 Assets'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 701
+    end
+    object UQuickButton3: TUQuickButton
+      Left = 666
+      Top = 0
+      ButtonStyle = sbsMin
+      LightColor = 13619151
+      DarkColor = 3947580
+      PressBrightnessDelta = -32
+      Align = alRight
+      Caption = #59192
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe MDL2 Assets'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 648
+      ExplicitTop = 8
+    end
+    object UQuickButton4: TUQuickButton
       Left = 0
       Top = 0
-      Width = 45
-      Height = 32
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = #57510
+      ButtonStyle = sbsHighlight
+      LightColor = 14120960
+      DarkColor = 14120960
       Align = alLeft
+      Caption = #57510
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
+      Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'Segoe MDL2 Assets'
       Font.Style = []
       ParentFont = False
-      TabOrder = 0
-      TabStop = True
-      ExplicitLeft = 8
-    end
-    object UButton3: TUButton
-      Left = 674
-      Top = 0
-      Width = 48
-      Height = 32
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = #59192
-      Align = alRight
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe MDL2 Assets'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      TabStop = True
-      OnClick = UButton3Click
-      ExplicitLeft = 637
-      ExplicitTop = -6
-    end
-    object UButton2: TUButton
-      Left = 722
-      Top = 0
-      Width = 32
-      Height = 32
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = #59193
-      Align = alRight
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe MDL2 Assets'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 2
-      TabStop = True
-      OnClick = UButton2Click
-      ExplicitLeft = 672
-    end
-    object UButton1: TUButton
-      Left = 754
-      Top = 0
-      Width = 47
-      Height = 32
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 2298344
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = #57610
-      Align = alRight
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe MDL2 Assets'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 3
-      TabStop = True
-      OnClick = UButton1Click
-      ExplicitLeft = 753
+      ExplicitLeft = 288
+      ExplicitTop = 16
     end
   end
   object drawerNavigation: TUPanel
     Left = 0
     Top = 32
     Width = 175
-    Height = 453
-    CustomTextColor = clBlack
-    CustomBackColor = 15132390
+    Height = 579
     Align = alLeft
-    BevelOuter = bvNone
+    Color = 15132390
     DoubleBuffered = True
     FullRepaint = False
     Font.Charset = DEFAULT_CHARSET
@@ -167,10 +118,14 @@ object frmMain: TfrmMain
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
-    ParentBackground = False
     ParentDoubleBuffered = False
     ParentFont = False
     TabOrder = 1
+    ThemeManager = UThemeManager1
+    BackColor.Enabled = False
+    BackColor.Color = clBlack
+    BackColor.LightColor = 15132390
+    BackColor.DarkColor = 2039583
     object buttonOpenMenu: TUSymbolButton
       Left = 0
       Top = 0
@@ -181,11 +136,6 @@ object frmMain: TfrmMain
       SymbolFont.Height = -16
       SymbolFont.Name = 'Segoe MDL2 Assets'
       SymbolFont.Style = []
-      TextFont.Charset = DEFAULT_CHARSET
-      TextFont.Color = clBlack
-      TextFont.Height = -15
-      TextFont.Name = 'Segoe UI'
-      TextFont.Style = [fsBold]
       DetailFont.Charset = DEFAULT_CHARSET
       DetailFont.Color = clWindowText
       DetailFont.Height = -13
@@ -198,8 +148,6 @@ object frmMain: TfrmMain
       ShowDetail = False
       Align = alTop
       Constraints.MaxWidth = 175
-      TabOrder = 0
-      TabStop = True
       OnClick = buttonOpenMenuClick
     end
     object buttonMenuSettings: TUSymbolButton
@@ -212,11 +160,52 @@ object frmMain: TfrmMain
       SymbolFont.Height = -16
       SymbolFont.Name = 'Segoe MDL2 Assets'
       SymbolFont.Style = []
-      TextFont.Charset = DEFAULT_CHARSET
-      TextFont.Color = clBlack
-      TextFont.Height = -13
-      TextFont.Name = 'Segoe UI'
-      TextFont.Style = []
+      DetailFont.Charset = DEFAULT_CHARSET
+      DetailFont.Color = clWindowText
+      DetailFont.Height = -13
+      DetailFont.Name = 'Segoe UI'
+      DetailFont.Style = []
+      SymbolChar = #59222
+      Text = 'Windows Terminal'
+      TextOffset = 45
+      Detail = 'Detail'
+      ShowDetail = False
+      Align = alTop
+      OnClick = buttonMenuSettingsClick
+    end
+    object buttonMenuProfile: TUSymbolButton
+      Left = 0
+      Top = 220
+      Width = 175
+      Height = 45
+      SymbolFont.Charset = DEFAULT_CHARSET
+      SymbolFont.Color = clWindowText
+      SymbolFont.Height = -16
+      SymbolFont.Name = 'Segoe MDL2 Assets'
+      SymbolFont.Style = []
+      DetailFont.Charset = DEFAULT_CHARSET
+      DetailFont.Color = clWindowText
+      DetailFont.Height = -13
+      DetailFont.Name = 'Segoe UI'
+      DetailFont.Style = []
+      SymbolChar = #59280
+      Text = 'Themes'
+      TextOffset = 45
+      Detail = 'Detail'
+      ShowDetail = False
+      Align = alTop
+      OnClick = buttonMenuProfileClick
+    end
+    object buttonMenuSave: TUSymbolButton
+      Left = 0
+      Top = 175
+      Width = 175
+      Height = 45
+      SymbolFont.Charset = DEFAULT_CHARSET
+      SymbolFont.Color = clWindowText
+      SymbolFont.Height = -16
+      SymbolFont.Name = 'Segoe MDL2 Assets'
+      SymbolFont.Style = []
       DetailFont.Charset = DEFAULT_CHARSET
       DetailFont.Color = clWindowText
       DetailFont.Height = -13
@@ -228,66 +217,7 @@ object frmMain: TfrmMain
       Detail = 'Detail'
       ShowDetail = False
       Align = alTop
-      TabOrder = 1
-      TabStop = True
-    end
-    object buttonMenuProfile: TUSymbolButton
-      Left = 0
-      Top = 180
-      Width = 175
-      Height = 45
-      SymbolFont.Charset = DEFAULT_CHARSET
-      SymbolFont.Color = clWindowText
-      SymbolFont.Height = -16
-      SymbolFont.Name = 'Segoe MDL2 Assets'
-      SymbolFont.Style = []
-      TextFont.Charset = DEFAULT_CHARSET
-      TextFont.Color = clBlack
-      TextFont.Height = -13
-      TextFont.Name = 'Segoe UI'
-      TextFont.Style = []
-      DetailFont.Charset = DEFAULT_CHARSET
-      DetailFont.Color = clWindowText
-      DetailFont.Height = -13
-      DetailFont.Name = 'Segoe UI'
-      DetailFont.Style = []
-      SymbolChar = #57621
-      Text = 'Settings'
-      TextOffset = 45
-      Detail = 'Detail'
-      ShowDetail = False
-      Align = alTop
-      TabOrder = 2
-      TabStop = True
-    end
-    object buttonMenuSave: TUSymbolButton
-      Left = 0
-      Top = 135
-      Width = 175
-      Height = 45
-      SymbolFont.Charset = DEFAULT_CHARSET
-      SymbolFont.Color = clWindowText
-      SymbolFont.Height = -16
-      SymbolFont.Name = 'Segoe MDL2 Assets'
-      SymbolFont.Style = []
-      TextFont.Charset = DEFAULT_CHARSET
-      TextFont.Color = clBlack
-      TextFont.Height = -13
-      TextFont.Name = 'Segoe UI'
-      TextFont.Style = []
-      DetailFont.Charset = DEFAULT_CHARSET
-      DetailFont.Color = clWindowText
-      DetailFont.Height = -13
-      DetailFont.Name = 'Segoe UI'
-      DetailFont.Style = []
-      SymbolChar = #59249
-      Text = 'Themes'
-      TextOffset = 45
-      Detail = 'Detail'
-      ShowDetail = False
-      Align = alTop
-      TabOrder = 3
-      TabStop = True
+      OnClick = buttonMenuSaveClick
     end
     object buttonMenuOpen: TUSymbolButton
       Left = 0
@@ -299,11 +229,6 @@ object frmMain: TfrmMain
       SymbolFont.Height = -16
       SymbolFont.Name = 'Segoe MDL2 Assets'
       SymbolFont.Style = []
-      TextFont.Charset = DEFAULT_CHARSET
-      TextFont.Color = clBlack
-      TextFont.Height = -13
-      TextFont.Name = 'Segoe UI'
-      TextFont.Style = []
       DetailFont.Charset = DEFAULT_CHARSET
       DetailFont.Color = clWindowText
       DetailFont.Height = -13
@@ -315,12 +240,11 @@ object frmMain: TfrmMain
       Detail = 'Detail'
       ShowDetail = False
       Align = alTop
-      TabOrder = 4
-      TabStop = True
+      OnClick = buttonMenuOpenClick
     end
     object buttonMenuRate: TUSymbolButton
       Left = 0
-      Top = 408
+      Top = 534
       Width = 175
       Height = 45
       SymbolFont.Charset = DEFAULT_CHARSET
@@ -328,11 +252,6 @@ object frmMain: TfrmMain
       SymbolFont.Height = -16
       SymbolFont.Name = 'Segoe MDL2 Assets'
       SymbolFont.Style = []
-      TextFont.Charset = DEFAULT_CHARSET
-      TextFont.Color = clBlack
-      TextFont.Height = -13
-      TextFont.Name = 'Segoe UI'
-      TextFont.Style = []
       DetailFont.Charset = DEFAULT_CHARSET
       DetailFont.Color = clWindowText
       DetailFont.Height = -13
@@ -344,902 +263,2021 @@ object frmMain: TfrmMain
       Detail = 'Detail'
       ShowDetail = False
       Align = alBottom
-      TabOrder = 5
-      TabStop = True
+      OnClick = buttonMenuRateClick
     end
-  end
-  object UScrollBox1: TUScrollBox
-    Left = 175
-    Top = 32
-    Width = 626
-    Height = 453
-    Align = alClient
-    AutoSize = True
-    BorderStyle = bsNone
-    DoubleBuffered = True
-    Color = clWhite
-    ParentColor = False
-    ParentDoubleBuffered = False
-    TabOrder = 2
-    MaxScrollCount = 6
-    object Label1: TLabel
-      Left = 15
-      Top = 11
-      Width = 74
-      Height = 13
-      Caption = 'Color Schemes:'
-    end
-    object Panel1: TPanel
-      Left = 15
-      Top = 71
-      Width = 601
-      Height = 332
-      BevelOuter = bvLowered
-      TabOrder = 0
-      object ListBox1: TListBox
-        Left = 3
-        Top = 48
-        Width = 136
-        Height = 225
-        ItemHeight = 13
-        TabOrder = 0
-        Visible = False
-      end
-      object RichEdit1: TRichEdit
-        Left = 1
-        Top = 1
-        Width = 599
-        Height = 330
-        Align = alClient
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        BorderStyle = bsNone
-        Color = clBlack
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clSilver
-        Font.Height = -16
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentFont = False
-        ReadOnly = True
-        ScrollBars = ssBoth
-        TabOrder = 1
-        Zoom = 100
-      end
-    end
-    object GridPanel1: TGridPanel
-      Left = 15
-      Top = 37
-      Width = 600
-      Height = 33
-      BorderWidth = 2
-      ColumnCollection = <
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end
-        item
-          SizeStyle = ssAbsolute
-          Value = 37.000000000000000000
-        end>
-      ControlCollection = <
-        item
-          Column = 0
-          Control = col00
-          Row = 0
-        end
-        item
-          Column = 1
-          Control = col01
-          Row = 0
-        end
-        item
-          Column = 2
-          Control = col02
-          Row = 0
-        end
-        item
-          Column = 3
-          Control = col03
-          Row = 0
-        end
-        item
-          Column = 4
-          Control = col04
-          Row = 0
-        end
-        item
-          Column = 5
-          Control = col05
-          Row = 0
-        end
-        item
-          Column = 6
-          Control = col06
-          Row = 0
-        end
-        item
-          Column = 7
-          Control = col07
-          Row = 0
-        end
-        item
-          Column = 8
-          Control = col08
-          Row = 0
-        end
-        item
-          Column = 9
-          Control = col09
-          Row = 0
-        end
-        item
-          Column = 10
-          Control = col10
-          Row = 0
-        end
-        item
-          Column = 11
-          Control = col11
-          Row = 0
-        end
-        item
-          Column = 12
-          Control = col12
-          Row = 0
-        end
-        item
-          Column = 13
-          Control = col13
-          Row = 0
-        end
-        item
-          Column = 14
-          Control = col14
-          Row = 0
-        end
-        item
-          Column = 15
-          Control = col15
-          Row = 0
-        end>
-      Ctl3D = True
-      ParentCtl3D = False
-      RowCollection = <
-        item
-          Value = 100.000000000000000000
-        end>
-      TabOrder = 1
-      object col00: TPanel
-        Left = 3
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '0'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 0
-        OnMouseUp = PickColor
-      end
-      object col01: TPanel
-        Left = 40
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '1'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 1
-        OnMouseUp = PickColor
-      end
-      object col02: TPanel
-        Left = 77
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '2'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 2
-        OnMouseUp = PickColor
-      end
-      object col03: TPanel
-        Left = 114
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '3'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
-        OnMouseUp = PickColor
-      end
-      object col04: TPanel
-        Left = 151
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '4'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 4
-        OnMouseUp = PickColor
-      end
-      object col05: TPanel
-        Left = 188
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '5'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 5
-        OnMouseUp = PickColor
-      end
-      object col06: TPanel
-        Left = 225
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '6'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 6
-        OnMouseUp = PickColor
-      end
-      object col07: TPanel
-        Left = 262
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '7'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 7
-        OnMouseUp = PickColor
-      end
-      object col08: TPanel
-        Left = 299
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '8'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 8
-        OnMouseUp = PickColor
-      end
-      object col09: TPanel
-        Left = 336
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = '9'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 9
-        OnMouseUp = PickColor
-      end
-      object col10: TPanel
-        Left = 373
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = 'A'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 10
-        OnMouseUp = PickColor
-      end
-      object col11: TPanel
-        Left = 410
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = 'B'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 11
-        OnMouseUp = PickColor
-      end
-      object col12: TPanel
-        Left = 447
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = 'C'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 12
-        OnMouseUp = PickColor
-      end
-      object col13: TPanel
-        Left = 484
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = 'D'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 13
-        OnMouseUp = PickColor
-      end
-      object col14: TPanel
-        Left = 521
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = 'E'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 14
-        OnMouseUp = PickColor
-      end
-      object col15: TPanel
-        Left = 558
-        Top = 3
-        Width = 37
-        Height = 27
-        Cursor = crHandPoint
-        Hint = 'Hold Ctrl and click to paste Hexadecimal color'
-        Align = alClient
-        BevelOuter = bvLowered
-        Caption = 'F'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Consolas'
-        Font.Style = []
-        ParentBackground = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 15
-        OnMouseUp = PickColor
-      end
-    end
-    object ComboBox1: TComboBox
-      Left = 95
-      Top = 8
-      Width = 145
-      Height = 21
-      ItemIndex = 0
-      TabOrder = 2
-      Text = 'Legacy Colors'
-      OnChange = ComboBox1Change
-      Items.Strings = (
-        'Legacy Colors'
-        'Default Colors')
-    end
-    object Button1: TButton
-      Left = 537
-      Top = 409
-      Width = 75
-      Height = 25
-      Caption = 'Export'
-      ImageIndex = 2
-      Images = ImageList1
-      TabOrder = 3
-      OnClick = ImportClick
-    end
-    object btnNew: TUButton
-      Left = 432
-      Top = 6
-      Width = 61
-      Height = 30
-      ThemeManager = UThemeManager1
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = 'New'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 4
-      TabStop = True
-      OnClick = btnNewClick
-    end
-    object btnPSPreview: TUButton
-      Left = 119
-      Top = 409
-      Width = 90
-      Height = 30
-      ThemeManager = UThemeManager1
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = 'Preview'
-      ImageIndex = 1
-      Images = ImageList1
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 5
-      TabStop = True
-      OnClick = btnPSPreviewClick
-    end
-    object btnReload: TUButton
-      Left = 246
-      Top = 6
-      Width = 62
-      Height = 30
-      ThemeManager = UThemeManager1
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = 'Reload'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 6
-      TabStop = True
-      OnClick = btnReloadClick
-    end
-    object btnResetCmd: TButton
-      Left = 371
-      Top = 377
-      Width = 128
-      Height = 25
-      Caption = 'Reset CMD settings'
-      ElevationRequired = True
-      Enabled = False
-      TabOrder = 7
-      Visible = False
-      OnClick = btnResetCmdClick
-    end
-    object btnSave: TUButton
-      Left = 314
-      Top = 6
-      Width = 50
-      Height = 30
-      ThemeManager = UThemeManager1
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = 'Save'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 8
-      TabStop = True
-      OnClick = btnSaveClick
-    end
-    object btnApply: TUButton
-      Left = 531
-      Top = 6
-      Width = 82
-      Height = 30
-      ThemeManager = UThemeManager1
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = 'Apply'
-      Highlight = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 9
-      TabStop = True
-      OnClick = btnApplyClick
-    end
-    object btnCmdPreview: TUButton
-      Left = 16
-      Top = 409
-      Width = 97
-      Height = 30
-      ThemeManager = UThemeManager1
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = 'Preview'
-      ImageIndex = 0
-      Images = ImageList1
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 10
-      TabStop = True
-      OnClick = btnCmdPreviewClick
-    end
-    object btnColorCmd: TButton
-      Left = 499
-      Top = 377
-      Width = 104
-      Height = 25
-      Caption = 'Preview in CMD'
-      TabOrder = 11
-      Visible = False
-      OnClick = btnColorCmdClick
-    end
-    object btnDelete: TUButton
-      Left = 370
-      Top = 6
-      Width = 56
-      Height = 30
-      ThemeManager = UThemeManager1
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = 'Delete'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 12
-      TabStop = True
-      OnClick = btnDeleteClick
-    end
-    object btnImport: TUButton
-      Left = 215
-      Top = 409
-      Width = 93
-      Height = 30
-      ThemeManager = UThemeManager1
-      CustomBorderColors.None = 15921906
-      CustomBorderColors.Hover = 15132390
-      CustomBorderColors.Press = 13421772
-      CustomBorderColors.Disabled = 15921906
-      CustomBorderColors.Focused = 15921906
-      CustomBackColors.None = 15921906
-      CustomBackColors.Hover = 15132390
-      CustomBackColors.Press = 13421772
-      CustomBackColors.Disabled = 15921906
-      CustomBackColors.Focused = 15921906
-      CustomTextColors.Disabled = clGray
-      Text = 'Import'
-      ImageIndex = 2
-      Images = ImageList1
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 13
-      TabStop = True
-      OnClick = btnImportClick
-    end
-    object USymbolButton1: TUSymbolButton
-      Left = 351
-      Top = 408
-      Width = 156
-      Height = 31
-      ThemeManager = UThemeManager1
+    object USymbolButton2: TUSymbolButton
+      Left = 0
+      Top = 135
+      Width = 175
       SymbolFont.Charset = DEFAULT_CHARSET
       SymbolFont.Color = clWindowText
       SymbolFont.Height = -16
       SymbolFont.Name = 'Segoe MDL2 Assets'
       SymbolFont.Style = []
-      TextFont.Charset = DEFAULT_CHARSET
-      TextFont.Color = clWindowText
-      TextFont.Height = -13
-      TextFont.Name = 'Segoe UI'
-      TextFont.Style = []
       DetailFont.Charset = DEFAULT_CHARSET
       DetailFont.Color = clWindowText
       DetailFont.Height = -13
       DetailFont.Name = 'Segoe UI'
       DetailFont.Style = []
-      SymbolChar = #59222
-      Text = 'Windows Terminal'
+      SymbolChar = #59249
+      Text = 'Profiles'
+      TextOffset = 45
       Detail = 'Detail'
       ShowDetail = False
-      TabOrder = 14
-      TabStop = True
-      OnClick = USymbolButton1Click
+      Align = alTop
+      OnClick = USymbolButton2Click
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 175
+    Top = 32
+    Width = 626
+    Height = 579
+    ActivePage = TabSheet2
+    Align = alClient
+    Style = tsFlatButtons
+    TabOrder = 2
+    object TabSheet1: TTabSheet
+      Caption = 'TabSheet1'
+      object UScrollBox1: TUScrollBox
+        Left = 0
+        Top = 0
+        Width = 618
+        Height = 548
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Tracking = True
+        Align = alClient
+        AutoSize = True
+        DoubleBuffered = True
+        Color = clWhite
+        ParentColor = False
+        ParentDoubleBuffered = False
+        TabOrder = 0
+        AniSet.AniKind = akOut
+        AniSet.AniFunctionKind = afkQuartic
+        AniSet.DelayStartTime = 0
+        AniSet.Duration = 250
+        AniSet.Step = 25
+        BackColor.Enabled = False
+        BackColor.Color = clBlack
+        BackColor.LightColor = 15132390
+        BackColor.DarkColor = 2039583
+        MaxScrollCount = 6
+        object Label1: TLabel
+          Left = 15
+          Top = 56
+          Width = 74
+          Height = 13
+          Caption = 'Color Schemes:'
+        end
+        object Label2: TLabel
+          Left = 15
+          Top = 19
+          Width = 47
+          Height = 13
+          Caption = 'Consoles:'
+        end
+        object GridPanel1: TGridPanel
+          Left = 15
+          Top = 82
+          Width = 600
+          Height = 33
+          BorderWidth = 2
+          ColumnCollection = <
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end
+            item
+              SizeStyle = ssAbsolute
+              Value = 37.000000000000000000
+            end>
+          ControlCollection = <
+            item
+              Column = 0
+              Control = col00
+              Row = 0
+            end
+            item
+              Column = 1
+              Control = col01
+              Row = 0
+            end
+            item
+              Column = 2
+              Control = col02
+              Row = 0
+            end
+            item
+              Column = 3
+              Control = col03
+              Row = 0
+            end
+            item
+              Column = 4
+              Control = col04
+              Row = 0
+            end
+            item
+              Column = 5
+              Control = col05
+              Row = 0
+            end
+            item
+              Column = 6
+              Control = col06
+              Row = 0
+            end
+            item
+              Column = 7
+              Control = col07
+              Row = 0
+            end
+            item
+              Column = 8
+              Control = col08
+              Row = 0
+            end
+            item
+              Column = 9
+              Control = col09
+              Row = 0
+            end
+            item
+              Column = 10
+              Control = col10
+              Row = 0
+            end
+            item
+              Column = 11
+              Control = col11
+              Row = 0
+            end
+            item
+              Column = 12
+              Control = col12
+              Row = 0
+            end
+            item
+              Column = 13
+              Control = col13
+              Row = 0
+            end
+            item
+              Column = 14
+              Control = col14
+              Row = 0
+            end
+            item
+              Column = 15
+              Control = col15
+              Row = 0
+            end>
+          Ctl3D = True
+          ParentCtl3D = False
+          RowCollection = <
+            item
+              Value = 100.000000000000000000
+            end>
+          TabOrder = 0
+          object col00: TPanel
+            Left = 3
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '0'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnMouseUp = PickColor
+          end
+          object col01: TPanel
+            Left = 40
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '1'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            OnMouseUp = PickColor
+          end
+          object col02: TPanel
+            Left = 77
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '2'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 2
+            OnMouseUp = PickColor
+          end
+          object col03: TPanel
+            Left = 114
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '3'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 3
+            OnMouseUp = PickColor
+          end
+          object col04: TPanel
+            Left = 151
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '4'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 4
+            OnMouseUp = PickColor
+          end
+          object col05: TPanel
+            Left = 188
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '5'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 5
+            OnMouseUp = PickColor
+          end
+          object col06: TPanel
+            Left = 225
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '6'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 6
+            OnMouseUp = PickColor
+          end
+          object col07: TPanel
+            Left = 262
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '7'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 7
+            OnMouseUp = PickColor
+          end
+          object col08: TPanel
+            Left = 299
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '8'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 8
+            OnMouseUp = PickColor
+          end
+          object col09: TPanel
+            Left = 336
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = '9'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 9
+            OnMouseUp = PickColor
+          end
+          object col10: TPanel
+            Left = 373
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = 'A'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 10
+            OnMouseUp = PickColor
+          end
+          object col11: TPanel
+            Left = 410
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = 'B'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 11
+            OnMouseUp = PickColor
+          end
+          object col12: TPanel
+            Left = 447
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = 'C'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 12
+            OnMouseUp = PickColor
+          end
+          object col13: TPanel
+            Left = 484
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = 'D'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 13
+            OnMouseUp = PickColor
+          end
+          object col14: TPanel
+            Left = 521
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = 'E'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 14
+            OnMouseUp = PickColor
+          end
+          object col15: TPanel
+            Left = 558
+            Top = 3
+            Width = 37
+            Height = 27
+            Cursor = crHandPoint
+            Hint = 'Hold Ctrl and click to paste Hexadecimal color'
+            Align = alClient
+            BevelOuter = bvLowered
+            Caption = 'F'
+            Color = clWhite
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Consolas'
+            Font.Style = []
+            ParentBackground = False
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 15
+            OnMouseUp = PickColor
+          end
+        end
+        object ComboBox1: TComboBox
+          Left = 95
+          Top = 53
+          Width = 145
+          Height = 21
+          ItemIndex = 0
+          TabOrder = 1
+          Text = 'Legacy Colors'
+          OnChange = ComboBox1Change
+          Items.Strings = (
+            'Legacy Colors'
+            'Default Colors')
+        end
+        object btnNew: TUButton
+          Left = 314
+          Top = 49
+          Width = 61
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          Caption = '&New'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnNewClick
+        end
+        object btnPSPreview: TUButton
+          Left = 122
+          Top = 489
+          Width = 90
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          ImageIndex = 1
+          Images = ImageList1
+          Caption = 'Preview'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnPSPreviewClick
+        end
+        object btnReload: TUButton
+          Left = 246
+          Top = 49
+          Width = 62
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          Caption = '&Reload'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnReloadClick
+        end
+        object btnResetCmd: TButton
+          Left = 374
+          Top = 457
+          Width = 128
+          Height = 25
+          Caption = 'Reset CMD settings'
+          ElevationRequired = True
+          Enabled = False
+          TabOrder = 5
+          Visible = False
+          OnClick = btnResetCmdClick
+        end
+        object btnSave: TUButton
+          Left = 443
+          Top = 49
+          Width = 62
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          Caption = '&Save'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnSaveClick
+        end
+        object btnApply: TUButton
+          Left = 430
+          Top = 13
+          Width = 92
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          Highlight = True
+          Caption = '&Apply'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnApplyClick
+        end
+        object btnCmdPreview: TUButton
+          Left = 19
+          Top = 489
+          Width = 97
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          ImageIndex = 0
+          Images = ImageList1
+          Caption = 'Preview'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnCmdPreviewClick
+        end
+        object btnColorCmd: TButton
+          Left = 502
+          Top = 457
+          Width = 104
+          Height = 25
+          Caption = 'Preview in CMD'
+          TabOrder = 9
+          Visible = False
+          OnClick = btnColorCmdClick
+        end
+        object btnDelete: TUButton
+          Left = 381
+          Top = 49
+          Width = 56
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          Caption = '&Delete'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnDeleteClick
+        end
+        object btnImport: TUButton
+          Left = 522
+          Top = 49
+          Width = 93
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          ImageIndex = 2
+          Images = ImageList1
+          Caption = '&Import'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnImportClick
+        end
+        object USymbolButton1: TUSymbolButton
+          Left = 218
+          Top = 488
+          Width = 156
+          Height = 31
+          ThemeManager = UThemeManager1
+          SymbolFont.Charset = DEFAULT_CHARSET
+          SymbolFont.Color = clWindowText
+          SymbolFont.Height = -16
+          SymbolFont.Name = 'Segoe MDL2 Assets'
+          SymbolFont.Style = []
+          DetailFont.Charset = DEFAULT_CHARSET
+          DetailFont.Color = clWindowText
+          DetailFont.Height = -13
+          DetailFont.Name = 'Segoe UI'
+          DetailFont.Style = []
+          SymbolChar = #59222
+          Text = 'Windows Terminal'
+          Detail = 'Detail'
+          ShowDetail = False
+          OnClick = USymbolButton1Click
+        end
+        object cbConsoles: TComboBox
+          Left = 68
+          Top = 14
+          Width = 349
+          Height = 21
+          TabOrder = 13
+        end
+        object RichEdit1: TRichEdit
+          Left = 19
+          Top = 121
+          Width = 599
+          Height = 330
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          BorderStyle = bsNone
+          Color = clBlack
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clSilver
+          Font.Height = -16
+          Font.Name = 'Consolas'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          ScrollBars = ssBoth
+          TabOrder = 14
+          Zoom = 100
+        end
+        object btnClear: TUButton
+          Left = 528
+          Top = 13
+          Width = 86
+          ThemeManager = UThemeManager1
+          CustomBorderColors.None = 15921906
+          CustomBorderColors.Hover = 15132390
+          CustomBorderColors.Press = 13421772
+          CustomBorderColors.Disabled = 15921906
+          CustomBorderColors.Focused = 15921906
+          CustomBackColors.None = 15921906
+          CustomBackColors.Hover = 15132390
+          CustomBackColors.Press = 13421772
+          CustomBackColors.Disabled = 15921906
+          CustomBackColors.Focused = 15921906
+          CustomTextColors.Disabled = clGray
+          Caption = '&Clear'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btnClearClick
+        end
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'TabSheet2'
+      ImageIndex = 1
+      object UText1: TUText
+        Left = 24
+        Top = 92
+        Width = 89
+        Height = 17
+        Caption = 'Default Profile: '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UText5: TUText
+        AlignWithMargins = True
+        Left = 0
+        Top = 20
+        Width = 618
+        Height = 28
+        Margins.Left = 0
+        Margins.Top = 20
+        Margins.Right = 0
+        Margins.Bottom = 5
+        Align = alTop
+        Caption = 'Windows Terminal'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -20
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TextKind = tkHeading
+        ExplicitWidth = 159
+      end
+      object UText6: TUText
+        Left = 24
+        Top = 134
+        Width = 66
+        Height = 17
+        Caption = 'Initial Cols: '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UText7: TUText
+        Left = 24
+        Top = 170
+        Width = 72
+        Height = 17
+        Caption = 'Initial Rows: '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UText8: TUText
+        Left = 24
+        Top = 206
+        Width = 108
+        Height = 17
+        Caption = 'Requested Theme:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UText9: TUText
+        Left = 24
+        Top = 314
+        Width = 97
+        Height = 17
+        Caption = 'Word Delimiters:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UCheckBox1: TUCheckBox
+        Left = 16
+        Top = 56
+        Width = 142
+        ThemeManager = UThemeManager1
+        IconFont.Charset = DEFAULT_CHARSET
+        IconFont.Color = clWindowText
+        IconFont.Height = -20
+        IconFont.Name = 'Segoe MDL2 Assets'
+        IconFont.Style = []
+        State = cbsChecked
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UCheckBox2: TUCheckBox
+        Left = 16
+        Top = 236
+        Width = 164
+        ThemeManager = UThemeManager1
+        IconFont.Charset = DEFAULT_CHARSET
+        IconFont.Color = clWindowText
+        IconFont.Height = -20
+        IconFont.Name = 'Segoe MDL2 Assets'
+        IconFont.Style = []
+        State = cbsChecked
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UCheckBox3: TUCheckBox
+        Left = 16
+        Top = 272
+        Width = 218
+        ThemeManager = UThemeManager1
+        IconFont.Charset = DEFAULT_CHARSET
+        IconFont.Color = clWindowText
+        IconFont.Height = -20
+        IconFont.Name = 'Segoe MDL2 Assets'
+        IconFont.Style = []
+        State = cbsChecked
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object USlider2: TUSlider
+        Left = 216
+        Top = 128
+        Width = 257
+        Min = 1
+        Max = 999
+        Value = 120
+      end
+      object USlider3: TUSlider
+        Left = 216
+        Top = 168
+        Width = 257
+        Min = 1
+        Max = 999
+        Value = 30
+      end
+      object URadioButton1: TURadioButton
+        Left = 216
+        Top = 199
+        Width = 81
+        ThemeManager = UThemeManager1
+        IconFont.Charset = DEFAULT_CHARSET
+        IconFont.Color = clWindowText
+        IconFont.Height = -20
+        IconFont.Name = 'Segoe MDL2 Assets'
+        IconFont.Style = []
+        CustomActiveColor = 14120960
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object URadioButton2: TURadioButton
+        Left = 311
+        Top = 199
+        Width = 68
+        ThemeManager = UThemeManager1
+        IconFont.Charset = DEFAULT_CHARSET
+        IconFont.Color = clWindowText
+        IconFont.Height = -20
+        IconFont.Name = 'Segoe MDL2 Assets'
+        IconFont.Style = []
+        CustomActiveColor = 14120960
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object URadioButton3: TURadioButton
+        Left = 401
+        Top = 199
+        Width = 67
+        ThemeManager = UThemeManager1
+        IconFont.Charset = DEFAULT_CHARSET
+        IconFont.Color = clWindowText
+        IconFont.Height = -20
+        IconFont.Name = 'Segoe MDL2 Assets'
+        IconFont.Style = []
+        CustomActiveColor = 14120960
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UText15: TUText
+        Left = 16
+        Top = 369
+        Width = 190
+        Height = 17
+        Caption = 'List of Window Terminal running:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UEdit1: TUEdit
+        Left = 138
+        Top = 200
+        Width = 63
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        ThemeManager = UThemeManager1
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 56
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+        Edit.Text = 'system'
+      end
+      object UEdit2: TUEdit
+        Left = 138
+        Top = 308
+        Width = 335
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        ThemeManager = UThemeManager1
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 328
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+        Edit.Text = ' ./\\()\"'#39'-:,.;<>~!@#$%^&*|+=[]{}~?\u2502'
+      end
+      object UEdit3: TUEdit
+        Left = 138
+        Top = 92
+        Width = 335
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        ThemeManager = UThemeManager1
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 328
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+        Edit.Text = '{61c54bbd-c2c6-5271-96e7-009a87ff44bf}'
+      end
+      object UEdit4: TUEdit
+        Left = 138
+        Top = 128
+        Width = 63
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        ThemeManager = UThemeManager1
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 56
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+        Edit.Text = '120'
+      end
+      object UEdit5: TUEdit
+        Left = 138
+        Top = 164
+        Width = 63
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        ThemeManager = UThemeManager1
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 56
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+        Edit.Text = '30'
+      end
+      object ListBox1: TListBox
+        Left = 16
+        Top = 392
+        Width = 377
+        Height = 97
+        ItemHeight = 13
+        TabOrder = 5
+        OnDblClick = ListBox1DblClick
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'TabSheet3'
+      ImageIndex = 2
+      object UScrollBox2: TUScrollBox
+        Left = 0
+        Top = 0
+        Width = 618
+        Height = 548
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Tracking = True
+        Align = alClient
+        DoubleBuffered = True
+        Color = clWhite
+        ParentColor = False
+        ParentDoubleBuffered = False
+        TabOrder = 0
+        AniSet.AniKind = akOut
+        AniSet.AniFunctionKind = afkQuartic
+        AniSet.DelayStartTime = 0
+        AniSet.Duration = 250
+        AniSet.Step = 25
+        BackColor.Enabled = False
+        BackColor.Color = clBlack
+        BackColor.LightColor = 15132390
+        BackColor.DarkColor = 2039583
+        MaxScrollCount = 6
+        object UText4: TUText
+          AlignWithMargins = True
+          Left = 0
+          Top = 20
+          Width = 618
+          Height = 28
+          Margins.Left = 0
+          Margins.Top = 20
+          Margins.Right = 0
+          Margins.Bottom = 5
+          Align = alTop
+          Caption = 'Keybindings'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -20
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          TextKind = tkHeading
+          ExplicitWidth = 108
+        end
+        object Label3: TLabel
+          Left = 20
+          Top = 72
+          Width = 47
+          Height = 13
+          Caption = 'Close Tab'
+        end
+        object Label4: TLabel
+          Left = 20
+          Top = 97
+          Width = 42
+          Height = 13
+          Caption = 'New Tab'
+        end
+        object Label5: TLabel
+          Left = 20
+          Top = 122
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 0'
+        end
+        object Label6: TLabel
+          Left = 20
+          Top = 146
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 1'
+        end
+        object Label7: TLabel
+          Left = 20
+          Top = 172
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 2'
+        end
+        object Label8: TLabel
+          Left = 20
+          Top = 197
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 3'
+        end
+        object Label9: TLabel
+          Left = 20
+          Top = 222
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 4'
+        end
+        object Label10: TLabel
+          Left = 20
+          Top = 247
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 5'
+        end
+        object Label11: TLabel
+          Left = 20
+          Top = 272
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 6'
+        end
+        object Label12: TLabel
+          Left = 19
+          Top = 296
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 7'
+        end
+        object Label13: TLabel
+          Left = 20
+          Top = 324
+          Width = 84
+          Height = 13
+          Caption = 'New Tab Profile 8'
+        end
+        object Label14: TLabel
+          Left = 20
+          Top = 349
+          Width = 44
+          Height = 13
+          Caption = 'Next Tab'
+        end
+        object Label15: TLabel
+          Left = 20
+          Top = 374
+          Width = 68
+          Height = 13
+          Caption = 'Open Settings'
+        end
+        object Label16: TLabel
+          Left = 20
+          Top = 398
+          Width = 43
+          Height = 13
+          Caption = 'Prev Tab'
+        end
+        object Label17: TLabel
+          Left = 312
+          Top = 72
+          Width = 55
+          Height = 13
+          Caption = 'Scroll Down'
+        end
+        object Label18: TLabel
+          Left = 312
+          Top = 99
+          Width = 82
+          Height = 13
+          Caption = 'Scroll Down Page'
+        end
+        object Label19: TLabel
+          Left = 312
+          Top = 122
+          Width = 41
+          Height = 13
+          Caption = 'Scroll Up'
+        end
+        object Label20: TLabel
+          Left = 312
+          Top = 146
+          Width = 68
+          Height = 13
+          Caption = 'Scroll Up Page'
+        end
+        object Label21: TLabel
+          Left = 312
+          Top = 172
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 0'
+        end
+        object Label22: TLabel
+          Left = 312
+          Top = 197
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 1'
+        end
+        object Label23: TLabel
+          Left = 312
+          Top = 222
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 2'
+        end
+        object Label24: TLabel
+          Left = 312
+          Top = 247
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 3'
+        end
+        object Label25: TLabel
+          Left = 312
+          Top = 272
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 4'
+        end
+        object Label26: TLabel
+          Left = 313
+          Top = 296
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 5'
+        end
+        object Label27: TLabel
+          Left = 312
+          Top = 324
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 6'
+        end
+        object Label28: TLabel
+          Left = 312
+          Top = 347
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 7'
+        end
+        object Label29: TLabel
+          Left = 312
+          Top = 374
+          Width = 74
+          Height = 13
+          Caption = 'Switch to Tab 8'
+        end
+        object HotKey1: THotKey
+          Left = 110
+          Top = 68
+          Width = 180
+          Height = 19
+          HotKey = 16471
+          Modifiers = [hkCtrl]
+          TabOrder = 0
+        end
+        object HotKey3: THotKey
+          Left = 110
+          Top = 118
+          Width = 180
+          Height = 19
+          HotKey = 24625
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 1
+        end
+        object HotKey4: THotKey
+          Left = 110
+          Top = 143
+          Width = 180
+          Height = 19
+          HotKey = 24626
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 2
+        end
+        object HotKey5: THotKey
+          Left = 110
+          Top = 168
+          Width = 180
+          Height = 19
+          HotKey = 24627
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 3
+        end
+        object HotKey6: THotKey
+          Left = 110
+          Top = 193
+          Width = 180
+          Height = 19
+          HotKey = 24628
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 4
+        end
+        object HotKey7: THotKey
+          Left = 110
+          Top = 218
+          Width = 180
+          Height = 19
+          HotKey = 24629
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 5
+        end
+        object HotKey8: THotKey
+          Left = 110
+          Top = 243
+          Width = 180
+          Height = 19
+          HotKey = 24630
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 6
+        end
+        object HotKey9: THotKey
+          Left = 110
+          Top = 268
+          Width = 180
+          Height = 19
+          HotKey = 24631
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 7
+        end
+        object HotKey10: THotKey
+          Left = 399
+          Top = 118
+          Width = 180
+          Height = 19
+          HotKey = 24614
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 8
+        end
+        object HotKey11: THotKey
+          Left = 399
+          Top = 93
+          Width = 180
+          Height = 19
+          HotKey = 24610
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 9
+        end
+        object HotKey12: THotKey
+          Left = 399
+          Top = 68
+          Width = 180
+          Height = 19
+          HotKey = 24616
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 10
+        end
+        object HotKey13: THotKey
+          Left = 110
+          Top = 395
+          Width = 180
+          Height = 19
+          HotKey = 24585
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 11
+        end
+        object HotKey14: THotKey
+          Left = 110
+          Top = 370
+          Width = 180
+          Height = 19
+          HotKey = 16401
+          Modifiers = [hkCtrl]
+          TabOrder = 12
+        end
+        object HotKey15: THotKey
+          Left = 110
+          Top = 345
+          Width = 180
+          Height = 19
+          HotKey = 16393
+          Modifiers = [hkCtrl]
+          TabOrder = 13
+        end
+        object HotKey16: THotKey
+          Left = 110
+          Top = 320
+          Width = 180
+          Height = 19
+          HotKey = 24633
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 14
+        end
+        object HotKey17: THotKey
+          Left = 110
+          Top = 293
+          Width = 180
+          Height = 19
+          HotKey = 24632
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 15
+        end
+        object HotKey2: THotKey
+          Left = 110
+          Top = 93
+          Width = 180
+          Height = 19
+          HotKey = 16468
+          Modifiers = [hkCtrl]
+          TabOrder = 16
+        end
+        object HotKey18: THotKey
+          Left = 399
+          Top = 143
+          Width = 180
+          Height = 19
+          HotKey = 24609
+          Modifiers = [hkShift, hkCtrl]
+          TabOrder = 17
+        end
+        object HotKey19: THotKey
+          Left = 399
+          Top = 168
+          Width = 180
+          Height = 19
+          HotKey = 32817
+          TabOrder = 18
+        end
+        object HotKey20: THotKey
+          Left = 399
+          Top = 193
+          Width = 180
+          Height = 19
+          HotKey = 32818
+          TabOrder = 19
+        end
+        object HotKey21: THotKey
+          Left = 399
+          Top = 218
+          Width = 180
+          Height = 19
+          HotKey = 32819
+          TabOrder = 20
+        end
+        object HotKey22: THotKey
+          Left = 399
+          Top = 243
+          Width = 180
+          Height = 19
+          HotKey = 32820
+          TabOrder = 21
+        end
+        object HotKey23: THotKey
+          Left = 399
+          Top = 268
+          Width = 180
+          Height = 19
+          HotKey = 32821
+          TabOrder = 22
+        end
+        object HotKey24: THotKey
+          Left = 399
+          Top = 293
+          Width = 180
+          Height = 19
+          HotKey = 32822
+          TabOrder = 23
+        end
+        object HotKey25: THotKey
+          Left = 399
+          Top = 318
+          Width = 180
+          Height = 19
+          HotKey = 32823
+          TabOrder = 24
+        end
+        object HotKey26: THotKey
+          Left = 399
+          Top = 343
+          Width = 180
+          Height = 19
+          HotKey = 32824
+          TabOrder = 25
+        end
+        object HotKey27: THotKey
+          Left = 399
+          Top = 368
+          Width = 180
+          Height = 19
+          HotKey = 32825
+          TabOrder = 26
+        end
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'TabSheet4'
+      ImageIndex = 3
+      object UText3: TUText
+        AlignWithMargins = True
+        Left = 0
+        Top = 20
+        Width = 618
+        Height = 28
+        Margins.Left = 0
+        Margins.Top = 20
+        Margins.Right = 0
+        Margins.Bottom = 5
+        Align = alTop
+        Caption = 'Themes'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -20
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TextKind = tkHeading
+        ExplicitWidth = 66
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'TabSheet5'
+      ImageIndex = 4
+      object UText2: TUText
+        AlignWithMargins = True
+        Left = 0
+        Top = 20
+        Width = 618
+        Height = 28
+        Margins.Left = 0
+        Margins.Top = 20
+        Margins.Right = 0
+        Margins.Bottom = 5
+        Align = alTop
+        Caption = 'Profiles'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -20
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TextKind = tkHeading
+        ExplicitWidth = 64
+      end
+      object UText11: TUText
+        Left = 32
+        Top = 80
+        Width = 88
+        Height = 17
+        Caption = 'Acrylic Opacity:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UText12: TUText
+        Left = 48
+        Top = 111
+        Width = 72
+        Height = 17
+        Caption = 'Background:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UText13: TUText
+        Left = 36
+        Top = 183
+        Width = 84
+        Height = 17
+        Caption = 'Color Scheme:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object UText14: TUText
+        Left = 30
+        Top = 229
+        Width = 90
+        Height = 17
+        Caption = 'Command Line:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object USlider1: TUSlider
+        Left = 126
+        Top = 80
+        Width = 185
+      end
+      object UCheckBox4: TUCheckBox
+        Left = 120
+        Top = 147
+        Width = 115
+        IconFont.Charset = DEFAULT_CHARSET
+        IconFont.Color = clWindowText
+        IconFont.Height = -20
+        IconFont.Name = 'Segoe MDL2 Assets'
+        IconFont.Style = []
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object ComboBox2: TComboBox
+        Left = 126
+        Top = 183
+        Width = 203
+        Height = 21
+        TabOrder = 1
+        Text = 'ComboBox2'
+        Visible = False
+        OnSelect = ComboBox2Select
+        Items.Strings = (
+          '123'
+          '123'
+          '123'
+          '123'
+          '12')
+      end
+      object UEdit6: TUEdit
+        Left = 126
+        Top = 111
+        Width = 185
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 178
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+        Edit.Text = '#012456'
+      end
+      object USymbolButton3: TUSymbolButton
+        Left = 126
+        Top = 183
+        Width = 185
+        Height = 30
+        SymbolFont.Charset = DEFAULT_CHARSET
+        SymbolFont.Color = clWindowText
+        SymbolFont.Height = -16
+        SymbolFont.Name = 'Segoe MDL2 Assets'
+        SymbolFont.Style = []
+        DetailFont.Charset = DEFAULT_CHARSET
+        DetailFont.Color = clWindowText
+        DetailFont.Height = -13
+        DetailFont.Name = 'Segoe UI'
+        DetailFont.Style = []
+        SymbolChar = #60559
+        Text = 'Campbell'
+        Detail = 'Detail'
+        ShowDetail = False
+        OnClick = USymbolButton3Click
+      end
+      object UEdit7: TUEdit
+        Left = 126
+        Top = 223
+        Width = 185
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 178
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+        Edit.Text = 'powershell.exe'
+      end
+      object UEdit8: TUEdit
+        Left = 126
+        Top = 259
+        Width = 185
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 178
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+      end
+      object UEdit9: TUEdit
+        Left = 126
+        Top = 335
+        Width = 185
+        Height = 30
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        Edit.Left = 4
+        Edit.Top = 4
+        Edit.Width = 178
+        Edit.Height = 23
+        Edit.ParentColor = False
+        Edit.ParentFont = False
+      end
+      object USymbolButton4: TUSymbolButton
+        Left = 126
+        Top = 295
+        Width = 185
+        Height = 30
+        SymbolFont.Charset = DEFAULT_CHARSET
+        SymbolFont.Color = clWindowText
+        SymbolFont.Height = -16
+        SymbolFont.Name = 'Segoe MDL2 Assets'
+        SymbolFont.Style = []
+        DetailFont.Charset = DEFAULT_CHARSET
+        DetailFont.Color = clWindowText
+        DetailFont.Height = -13
+        DetailFont.Name = 'Segoe UI'
+        DetailFont.Style = []
+        SymbolChar = #60559
+        Text = 'bar'
+        Detail = 'Detail'
+        ShowDetail = False
+      end
+    end
+    object TabSheet6: TTabSheet
+      Caption = 'TabSheet6'
+      ImageIndex = 5
+      object UText10: TUText
+        AlignWithMargins = True
+        Left = 0
+        Top = 20
+        Width = 618
+        Height = 28
+        Margins.Left = 0
+        Margins.Top = 20
+        Margins.Right = 0
+        Margins.Bottom = 5
+        Align = alTop
+        Caption = 'About'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -20
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TextKind = tkHeading
+        ExplicitWidth = 55
+      end
     end
   end
   object ColorDialog1: TColorDialog
@@ -1260,21 +2298,21 @@ object frmMain: TfrmMain
       'ColorN=FFFFFFFF'
       'ColorO=FFFFFFFF'
       'ColorP=FFFFFFFF')
-    Left = 671
-    Top = 120
+    Left = 79
+    Top = 312
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 311
-    Top = 200
+    Left = 119
+    Top = 352
   end
   object OpenDialog1: TOpenDialog
-    Left = 664
-    Top = 56
+    Left = 24
+    Top = 304
   end
   object ImageList1: TImageList
-    Left = 384
-    Top = 208
+    Left = 144
+    Top = 296
     Bitmap = {
       494C010104000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
@@ -1548,7 +2586,12 @@ object frmMain: TfrmMain
       000000000000}
   end
   object UThemeManager1: TUThemeManager
-    Left = 287
-    Top = 111
+    Left = 23
+    Top = 375
+  end
+  object tmrDetectWt: TTimer
+    OnTimer = tmrDetectWtTimer
+    Left = 595
+    Top = 419
   end
 end

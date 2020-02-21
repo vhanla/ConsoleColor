@@ -11784,15 +11784,13 @@ object frmColorPicker: TfrmColorPicker
     CustomBackColors.Disabled = 15921906
     CustomBackColors.Focused = 15921906
     CustomTextColors.Disabled = clGray
-    Text = 'Cancel'
+    Caption = '&Cancel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
-    TabStop = True
     OnClick = UButton1Click
   end
   object UButton2: TUButton
@@ -11812,16 +11810,14 @@ object frmColorPicker: TfrmColorPicker
     CustomBackColors.Disabled = 15921906
     CustomBackColors.Focused = 15921906
     CustomTextColors.Disabled = clGray
-    Text = 'OK'
     Highlight = True
+    Caption = '&Ok'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -13
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    TabOrder = 6
-    TabStop = True
     OnClick = UButton2Click
   end
   object ilMain: TImageList
